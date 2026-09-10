@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IT/BI Planner Pro · Gestión de proyectos TI &amp; BI</title>
+  <meta name="description" content="IT/BI Planner Pro: dashboard gerencial y planner personal para equipos de TI y Business Intelligence. Dark mode, SPA, Supabase y Cloudflare Pages." />
+
+  <!-- Favicon SVG inline (evita 404) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cdefs%3E%3ClinearGradient%20id='g'%20x1='0'%20y1='0'%20x2='1'%20y2='1'%3E%3Cstop%20offset='0'%20stop-color='%234d6bfe'/%3E%3Cstop%20offset='1'%20stop-color='%238b5cf6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width='64'%20height='64'%20rx='15'%20fill='url(%23g)'/%3E%3Ctext%20x='32'%20y='43'%20font-family='Arial,sans-serif'%20font-size='30'%20font-weight='700'%20fill='white'%20text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E" />
+
+  <!-- Tipografía Inter (con fallback system-ui si no hay red) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- CSS: lo inyecta Vite desde src/main.js (import './style.css') -->
+</head>
+
+<body class="bg-zinc-950 text-zinc-100 antialiased min-h-screen flex flex-col">
+
+  <!-- ═════════════════════════════════════════════════════════════════════════
+       HEADER SUPERIOR FIJO — sin sidebar, sin campanita de notificaciones.
+       Contiene: Logo · Switch de vistas · Avatar del usuario.
+  ══════════════════════════════════════════════════════════════════════════ -->
+  <header class="fixed top-0 inset-x-0 z-40 h-16 border-b border-zinc-800/70 bg-zinc-950/80 backdrop-blur-md">
+    <div class="w-full h-full px-4 sm:px-6 lg:px-9 flex items-center justify-between gap-3">
+
+      <!-- Logo Grupo Aurica -->
+      <a href="#" data-action="view-dashboard" class="group shrink-0 select-none" aria-label="Ir al Dashboard">
+        <img src="/grupo-aurica.webp" alt="Grupo Aurica" class="h-18 w-auto object-contain opacity-95 group-hover:opacity-100 transition" />
+      </a>
+
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- Switch de vistas (segmented control) -->
+        <nav class="flex items-center rounded-xl bg-zinc-900 p-1 ring-1 ring-zinc-800" aria-label="Vistas principales">
+          <button data-view-btn="dashboard"
+                  class="view-switch-btn rounded-lg px-3 sm:px-4 py-1.5 text-[13px] font-medium text-zinc-300 hover:text-zinc-100 transition">
+            Dashboard Gerencial
+          </button>
+          <button data-view-btn="planner"
+                  class="view-switch-btn rounded-lg px-3 sm:px-4 py-1.5 text-[13px] font-medium text-zinc-300 hover:text-zinc-100 transition">
+            Mi Planner
+          </button>
+        </nav>
+
+        <!-- Engranaje sutil: gestión de usuarios del equipo -->
+        <button type="button" data-action="open-users" aria-label="Gestionar usuarios del equipo"
+                title="Usuarios del equipo"
+                class="btn-ghost !p-2 text-zinc-500 hover:text-zinc-100 transition">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-[18px] h-[18px]" aria-hidden="true">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═════════════════════════════════════════════════════════════════════════
+       CONTENIDO PRINCIPAL (padding-top = altura del header fijo)
+  ══════════════════════════════════════════════════════════════════════════ -->
+  <main class="flex-1 pt-16">
+    <div class="w-full px-4 sm:px-6 lg:px-9 py-8">
+
+      <!-- ─────────────────────────── 1. DASHBOARD GERENCIAL ─────────────────────────── -->
+      <section id="view-dashboard" data-view-panel="dashboard">
+
+        <!-- Título + acciones -->
+        <div class="flex flex-wrap items-end justify-between gap-4 mb-7">
+          <div>
+            <h1 class="text-2xl font-bold tracking-tight text-zinc-50">Dashboard: Proyectos TI/BI</h1>
+            <p id="dash-subtitle" class="mt-1 text-sm text-zinc-500">Visión global del equipo de TI y Business Intelligence.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button data-action="open-report" class="btn btn-secondary" title="Generar informe de avance">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+              Informe
+            </button>
+            <button data-action="open-new-project" class="btn btn-primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="w-4 h-4"><path d="M12 5v14M5 12h14"/></svg>
+              Nuevo Proyecto
+            </button>
+          </div>
+        </div>
+
+        <!-- Insights de la reunión semanal (objetivos) -->
+        <div id="dash-insights" class="flex flex-wrap items-center gap-2 mb-6"><!-- JS --></div>
+
+        <!-- KPIs -->
+        <div id="kpi-grid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-6"><!-- JS --></div>
+
+        <!-- Tabla de proyectos -->
+        <article class="card overflow-hidden">
+          <div class="flex flex-wrap items-center justify-between gap-3 px-5 pt-5 pb-4 border-b border-zinc-800/70">
+            <div>
+              <h2 class="text-sm font-semibold text-zinc-200">Proyectos del Equipo</h2>
+              <p id="tbl-subtitle" class="text-xs text-zinc-500 mt-0.5">Proyectos activos · estado, responsable, último objetivo y avance</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <label class="relative">
+                <span class="absolute left-2.5 top-1/2 -translate-y-1/2 text-zinc-500">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="w-3.5 h-3.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                </span>
+                <input id="tbl-search" type="search" placeholder="Buscar proyecto o responsable…" class="input pl-8 w-48 sm:w-56" />
+              </label>
+              <select id="tbl-status" class="select w-auto">
+                <option value="all">Todos los estados</option>
+                <option value="on_time">Al día</option>
+                <option value="delayed">Retrasados</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full min-w-[1120px] text-sm">
+              <thead>
+                <tr class="text-left text-[11px] uppercase tracking-wider text-zinc-500">
+                  <th class="px-5 py-3 font-medium">Proyecto</th>
+                  <th class="px-4 py-3 font-medium hidden md:table-cell">Categoría</th>
+                  <th class="px-4 py-3 font-medium">Responsable</th>
+                  <th class="px-4 py-3 font-medium">Fecha límite</th>
+                  <th class="px-4 py-3 font-medium w-56">Progreso</th>
+                  <th class="px-4 py-3 font-medium">Avances</th>
+                  <th class="px-4 py-3 font-medium">Estado</th>
+                  <th class="px-4 py-3 font-medium hidden md:table-cell">Último objetivo</th>
+                  <th class="px-4 py-3 font-medium text-right">Acción</th>
+                </tr>
+              </thead>
+              <tbody id="tbl-body" class="divide-y divide-zinc-800/50"><!-- JS --></tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <!-- ─────────────────────────── 2. MI PLANNER (panel personal) ─────────────────────────── -->
+      <section id="view-planner" data-view-panel="planner" class="hidden">
+
+        <div class="flex flex-wrap items-end justify-between gap-4 mb-7">
+          <div>
+            <h1 class="text-2xl font-bold tracking-tight text-zinc-50">Mi Planner</h1>
+            <p class="mt-1 text-sm text-zinc-500">Ruta de avances de tus proyectos personales, hito a hito.</p>
+          </div>
+
+          <!-- Selector de proyecto personal + acciones -->
+          <div class="flex flex-wrap items-center gap-2">
+            <label id="planner-select-wrap" class="relative hidden">
+              <select id="planner-select" class="select pr-9 min-w-56" aria-label="Seleccionar proyecto personal"></select>
+              <span class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="m6 9 6 6 6-6"/></svg>
+              </span>
+            </label>
+            <button data-action="open-new-update" class="btn btn-primary" id="btn-new-update">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="w-4 h-4"><path d="M12 5v14M5 12h14"/></svg>
+              Nuevo Avance
+            </button>
+            <button data-action="open-new-project" class="btn btn-secondary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="w-4 h-4"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+              Nuevo Proyecto
+            </button>
+          </div>
+        </div>
+
+        <!-- Estado vacío: sin proyectos propios -->
+        <div id="planner-empty" class="hidden"><!-- JS --></div>
+
+        <!-- Cuerpo del planner (se muestra cuando hay proyecto seleccionado) -->
+        <div id="planner-body" class="hidden space-y-6"><!-- JS --></div>
+      </section>
+
+      <!-- Footer sutil -->
+      <footer class="mt-12 pb-6 flex flex-col sm:flex-row items-center justify-center gap-2 text-[11px] text-zinc-600">
+        <span>IT/BI Planner Pro · Diseñado para equipos de TI &amp; BI</span>
+        <span class="hidden sm:inline text-zinc-700">·</span>
+        <span>Fuente de datos: <span id="data-source-label" class="text-zinc-500 font-medium">—</span></span>
+      </footer>
+
+    </div>
+  </main>
+
+  <!-- Contenedores dinámicos: modales y toasts -->
+  <div id="modal-root"></div>
+  <div id="toast-root" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[70] flex flex-col items-center gap-2 pointer-events-none"></div>
+
+  <noscript>
+    <div style="padding:1rem;background:#27272a;color:#fafafa;text-align:center">
+      IT/BI Planner Pro requiere JavaScript habilitado.
+    </div>
+  </noscript>
+
+  <!-- Entry point del bundle -->
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

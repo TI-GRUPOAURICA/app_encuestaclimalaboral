@@ -1,0 +1,22 @@
+# Dependencias
+node_modules/
+.npm-cache/
+
+# Build
+dist/
+dist-ssr/
+
+# Entorno local (nunca subir claves)
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store

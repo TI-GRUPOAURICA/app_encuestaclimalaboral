@@ -1,0 +1,7 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Cloudflare Pages — SPA fallback
+# Cualquier ruta que no exista como archivo estático devuelve index.html
+# para que el enrutamiento del lado del cliente (vistas SPA) funcione al
+# recargar directamente sobre una ruta (ej: /dashboard, /planner).
+# ─────────────────────────────────────────────────────────────────────────────
+/*    /index.html   200

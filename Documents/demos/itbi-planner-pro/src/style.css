@@ -1,0 +1,433 @@
+/* ═════════════════════════════════════════════════════════════════════════════
+   IT/BI Planner Pro — Sistema de diseño "Dark Mode puro" (estilo DeepSeek)
+   Tailwind CSS v4: @import "tailwindcss" + tokens vía @theme.
+
+   Paleta:
+     Fondo principal ......... zinc-950  (#09090b) ≈ #0a0a0a
+     Tarjetas/contenedores ... zinc-900  (#18181b)
+     Bordes sutiles .......... zinc-800  (#27272a)
+     Texto secundario ........ zinc-400  / zinc-500
+     Acento de marca ......... brand-500 (#4d6bfe), azul estilo DeepSeek
+═════════════════════════════════════════════════════════════════════════════ */
+
+@import "tailwindcss";
+
+/* ── Tokens de diseño ─────────────────────────────────────────────────────── */
+@theme {
+  --font-sans: "Inter", "Inter Variable", ui-sans-serif, system-ui, -apple-system,
+               "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  /* Acento azul "DeepSeek" (#4d6bfe) */
+  --color-brand-50:  #eef1ff;
+  --color-brand-100: #dfe5ff;
+  --color-brand-200: #c6d0ff;
+  --color-brand-300: #a6b4ff;
+  --color-brand-400: #7f91ff;
+  --color-brand-500: #4d6bfe;
+  --color-brand-600: #3b54f0;
+  --color-brand-700: #2f42cf;
+  --color-brand-800: #2938a6;
+  --color-brand-900: #263583;
+  --color-brand-950: #181f4d;
+}
+
+/* ── Base ─────────────────────────────────────────────────────────────────── */
+@layer base {
+  :root { color-scheme: dark; }
+
+  /* ── Tipografía base más grande ──
+     Se sube la raíz de 16px a 17px: de forma GLOBAL todas las clases rem
+     (text-sm, text-xl, paddings, gaps…) crecen proporcionalmente, dando
+     aire a la interfaz ahora que ocupa todo el ancho de pantalla. */
+  html { font-family: var(--font-sans); font-size: 17px; }
+
+  body {
+    background-color: #09090b;
+    /* Halo azulado muy sutil en la parte superior (estilo DeepSeek) */
+    background-image: radial-gradient(1100px 600px at 75% -12%, rgba(77, 107, 254, 0.07), transparent 60%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+
+  /* ── Scrollbars finos por defecto (verticales / genéricos) ──
+     La barra HORIZONTAL del timeline se estiliza aparte (más gruesa) en .tl-scroll. */
+  * { scrollbar-width: thin; scrollbar-color: #3f3f46 transparent; }
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 8px; }
+  ::-webkit-scrollbar-thumb:hover { background: #52525b; }
+
+  /* Inputs nativos (fecha, etc.) en modo oscuro */
+  input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.6); cursor: pointer; }
+}
+
+/* ── Componentes reutilizables ────────────────────────────────────────────── */
+@layer components {
+  /* Tarjeta / contenedor estándar */
+  .card {
+    @apply rounded-2xl bg-zinc-900 ring-1 ring-zinc-800/70;
+  }
+
+  /* Botones */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-3.5 py-2 text-sm font-medium
+           whitespace-nowrap transition-colors duration-150 cursor-pointer select-none
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950
+           disabled:opacity-40 disabled:pointer-events-none;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-3.5 py-2 text-sm font-medium
+           whitespace-nowrap transition-colors duration-150 cursor-pointer select-none
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950
+           disabled:opacity-40 disabled:pointer-events-none
+           bg-brand-500 text-white hover:bg-brand-400 active:bg-brand-600
+           focus-visible:ring-brand-400/70 shadow-sm shadow-brand-950/40;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-3.5 py-2 text-sm font-medium
+           whitespace-nowrap transition-colors duration-150 cursor-pointer select-none
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950
+           disabled:opacity-40 disabled:pointer-events-none
+           bg-zinc-800/80 text-zinc-200 ring-1 ring-zinc-700/70 hover:bg-zinc-700/70 hover:text-white
+           focus-visible:ring-zinc-500;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-3 py-2 text-sm font-medium
+           whitespace-nowrap transition-colors duration-150 cursor-pointer select-none
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950
+           disabled:opacity-40 disabled:pointer-events-none
+           text-zinc-300 hover:bg-zinc-800/80 hover:text-white focus-visible:ring-zinc-500;
+  }
+  .btn-danger {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-3.5 py-2 text-sm font-medium
+           whitespace-nowrap transition-colors duration-150 cursor-pointer select-none
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950
+           disabled:opacity-40 disabled:pointer-events-none
+           bg-rose-600 text-white hover:bg-rose-500 active:bg-rose-700
+           focus-visible:ring-rose-400/70 shadow-sm;
+  }
+
+  /* Campos de formulario */
+  .input, .select, .textarea {
+    @apply w-full rounded-lg bg-zinc-950/70 ring-1 ring-zinc-800 px-3 py-2 text-sm text-zinc-100
+           placeholder-zinc-500 transition focus:outline-none focus:ring-2 focus:ring-brand-500/60;
+  }
+  .select {
+    @apply appearance-none cursor-pointer pr-9;
+  }
+  .textarea {
+    @apply resize-y min-h-24 leading-relaxed;
+  }
+  .label {
+    @apply block text-xs font-medium text-zinc-400 mb-1.5 tracking-wide;
+  }
+  .form-hint {
+    @apply mt-1.5 text-[11px] text-zinc-500;
+  }
+
+  /* Chip / badge genérico: combinar con clases de color (fondo, texto y borde) */
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium ring-1 ring-inset whitespace-nowrap;
+  }
+
+  /* Avatar generado con iniciales */
+  .avatar {
+    @apply inline-flex items-center justify-center rounded-full font-semibold text-white select-none shrink-0
+           ring-2 ring-zinc-950 shadow;
+  }
+
+  /* Texto con degradado (marca) */
+  .text-gradient {
+    background: linear-gradient(90deg, #7f91ff, #a78bfa);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+/* ── Switch de vistas del header (segmented control) ─────────────────────── */
+.view-switch-btn[aria-pressed="true"] {
+  @apply bg-zinc-800 text-white shadow-sm ring-1 ring-zinc-700/80;
+}
+
+/* ── Timeline horizontal (Mi Planner) ───────────────────────────────────────
+   Geometría en px fijos para que fecha → línea → etiqueta queden alineados
+   independientemente del navegador. Cada nodo dibuja una línea de fondo
+   continua y el punto (dot) coloreado se superpone, generando el "rail".
+────────────────────────────────────────────────────────────────────────────── */
+.tl-scroll {
+  overflow-x: auto;
+  padding: 6px 2px 18px;   /* más aire inferior para la barra gruesa */
+  /* scroll con snap sutil */
+  scroll-snap-type: x proximity;
+}
+/* ── Barra horizontal del timeline: MÁS GRUESA y visible ──
+   Se reserva ~13px de alto con una pista tenue y un pulgar tipo "píldora"
+   que se ilumina en el acento de marca al hacer hover (o arrastrar). */
+.tl-scroll { scrollbar-width: auto; scrollbar-color: #52525b rgba(255, 255, 255, 0.05); }
+.tl-scroll::-webkit-scrollbar { height: 13px; }
+.tl-scroll::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 9999px;
+  margin: 0 6px;
+}
+.tl-scroll::-webkit-scrollbar-thumb {
+  background: #52525b;                       /* zinc-600 */
+  border-radius: 9999px;
+  border: 3px solid transparent;             /* efecto píldora con margen */
+  background-clip: padding-box;
+}
+.tl-scroll::-webkit-scrollbar-thumb:hover { background-color: #4d6bfe; }       /* brand */
+.tl-scroll::-webkit-scrollbar-thumb:active { background-color: #3b54f0; }      /* brand-600 */
+.tl-scroll.fit { display: flex; }
+.tl-scroll.fit .tl-track { margin-inline: auto; }
+.tl-track {
+  display: inline-flex;
+  align-items: flex-start;
+  min-width: 100%;
+}
+.tl-col {
+  flex: 0 0 auto;
+  width: 10.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  scroll-snap-align: center;
+  cursor: pointer;
+}
+.tl-col:hover .tl-cap { color: #e4e4e7; }
+.tl-col:focus-visible { outline: none; }
+.tl-col:focus-visible .tl-dot {
+  transform: scale(1.4);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.14);
+}
+.tl-date {
+  height: 22px;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  line-height: 1;
+  color: #71717a;              /* zinc-500 */
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.tl-mid {
+  position: relative;
+  height: 34px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* Rail horizontal continuo detrás de los puntos */
+.tl-mid::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  transform: translateY(-50%);
+  background: rgba(63, 63, 70, 0.9);   /* zinc-700 translúcido */
+  border-radius: 2px;
+}
+.tl-dot {
+  position: relative;
+  z-index: 1;
+  width: 17px;
+  height: 17px;
+  border-radius: 9999px;
+  border: 3px solid #09090b;    /* mismo color que el fondo → efecto anillo */
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+.tl-dot:hover, .tl-dot:focus-visible {
+  transform: scale(1.4);
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.12);
+}
+.tl-cap {
+  margin-top: 11px;
+  font-size: 12.5px;
+  line-height: 1.3;
+  color: #a1a1aa;               /* zinc-400 */
+  font-weight: 500;
+  padding: 0 4px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── Slider de progreso (estilo delgado con thumb claro) ─────────────────── */
+input[type="range"].range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 9999px;
+  background: #27272a;
+  outline: none;
+  cursor: pointer;
+}
+input[type="range"].range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fafafa;
+  border: 2px solid #4d6bfe;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
+  cursor: grab;
+  transition: transform 0.12s ease;
+}
+input[type="range"].range::-webkit-slider-thumb:hover { transform: scale(1.12); }
+input[type="range"].range::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fafafa;
+  border: 2px solid #4d6bfe;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
+  cursor: grab;
+}
+
+/* ── Anillo de progreso (CSS puro, conic-gradient) ───────────────────────── */
+.progress-ring {
+  --p: 0;
+  width: 9rem;
+  height: 9rem;
+  border-radius: 9999px;
+  background: conic-gradient(#4d6bfe calc(var(--p) * 1%), #26262b 0);
+  display: grid;
+  place-items: center;
+  transition: --p 0.2s ease;
+}
+.progress-ring .inner {
+  width: calc(100% - 1.4rem);
+  height: calc(100% - 1.4rem);
+  border-radius: 9999px;
+  background: #18181b;          /* zinc-900, igual que la tarjeta */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+/* ── Modales ──────────────────────────────────────────────────────────────── */
+.modal-overlay {
+  @apply fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-6;
+  background: rgba(9, 9, 11, 0.72);
+  backdrop-filter: blur(4px);
+  animation: overlay-in 0.18s ease-out;
+}
+/* Modal apilado detrás del superior: sin fondo oscuro propio (el del superior
+   ya oscurece) ni animación, para que NO parpadee al abrir/cerrar niveles. */
+.modal-overlay.modal-behind {
+  background: transparent;
+  backdrop-filter: none;
+  animation: none;
+}
+.modal-card {
+  @apply w-full sm:max-w-lg bg-zinc-900 ring-1 ring-zinc-800 rounded-t-2xl sm:rounded-2xl shadow-2xl shadow-black/60
+         flex flex-col max-h-[92vh] sm:max-h-[85vh];
+  animation: modal-in 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.modal-card--wide { @apply sm:max-w-xl; }
+.modal-head {
+  @apply flex items-start justify-between gap-4 px-5 sm:px-6 pt-5 pb-4 border-b border-zinc-800/70;
+}
+.modal-body {
+  @apply px-5 sm:px-6 py-5 overflow-y-auto;
+}
+.modal-foot {
+  @apply flex items-center justify-end gap-2 px-5 sm:px-6 py-4 border-t border-zinc-800/70 bg-zinc-900/60 rounded-b-2xl;
+}
+
+/* ── Toasts ───────────────────────────────────────────────────────────────── */
+.toast {
+  @apply pointer-events-auto flex items-center gap-2.5 rounded-xl px-4 py-3 text-sm font-medium
+         ring-1 shadow-xl shadow-black/40 backdrop-blur;
+  animation: toast-in 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.toast-success { @apply bg-zinc-800/95 text-zinc-100 ring-emerald-500/40; }
+.toast-error   { @apply bg-zinc-800/95 text-zinc-100 ring-rose-500/40; }
+.toast-info    { @apply bg-zinc-800/95 text-zinc-100 ring-brand-500/40; }
+
+/* ── Animaciones ──────────────────────────────────────────────────────────── */
+@keyframes overlay-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes modal-in {
+  from { opacity: 0; transform: translateY(14px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Utilidad: opacidad de entrada para nodos del timeline (stagger sutil) */
+.tl-col { animation: modal-in 0.25s ease-out both; }
+.tl-col:nth-child(1) { animation-delay: 0.02s; }
+.tl-col:nth-child(2) { animation-delay: 0.05s; }
+.tl-col:nth-child(3) { animation-delay: 0.08s; }
+.tl-col:nth-child(4) { animation-delay: 0.11s; }
+.tl-col:nth-child(5) { animation-delay: 0.14s; }
+.tl-col:nth-child(6) { animation-delay: 0.17s; }
+.tl-col:nth-child(n + 7) { animation-delay: 0.2s; }
+
+/* ── Impresión del informe (solo el modal del reporte, fondo blanco) ──────── */
+@media print {
+  /* Ocultar TODO con display:none (no visibility) → no deja espacio en blanco
+     arriba: el informe empieza en el borde superior de la hoja. */
+  body { background: #fff !important; margin: 0 !important; display: block !important; }
+  body > *:not(#modal-root) { display: none !important; }
+  #modal-root { display: block !important; }
+  #modal-root > *:not(.modal-overlay.report-print) { display: none !important; }
+
+  .modal-overlay.report-print {
+    display: block !important;
+    position: static;
+    background: #fff;
+    backdrop-filter: none;
+    padding: 24px;
+  }
+  .modal-overlay.report-print .modal-card {
+    position: static;
+    box-shadow: none;
+    max-width: none;
+    border-radius: 0;
+    max-height: none;
+  }
+  .modal-overlay.report-print .modal-card .modal-body {
+    overflow: visible;
+    max-height: none;
+    padding: 0;
+  }
+  .modal-overlay.report-print .modal-head,
+  .modal-overlay.report-print .modal-foot { display: none !important; }
+  .modal-overlay.report-print [data-modal-close] { display: none !important; }
+
+  /* Fondo blanco en las tarjetas del reporte */
+  .modal-overlay.report-print .report-sheet,
+  .modal-overlay.report-print .report-sheet > div,
+  .modal-overlay.report-print .report-sheet .rounded-xl,
+  .modal-overlay.report-print .report-sheet [class*="bg-zinc-950"],
+  .modal-overlay.report-print .report-sheet [class*="bg-zinc-900"] {
+    background: #fff !important;
+  }
+  .modal-overlay.report-print .modal-card,
+  .modal-overlay.report-print .report-sheet .rounded-xl {
+    border: 1px solid #e5e7eb !important;
+    box-shadow: none !important;
+  }
+  /* Texto e iconos en oscuro para legibilidad en papel/PDF */
+  .modal-overlay.report-print .report-sheet * { color: #18181b !important; }
+
+  /* Evitar cortar una tarjeta/sección a mitad de página */
+  .modal-overlay.report-print .report-sheet .rounded-xl { break-inside: avoid; page-break-inside: avoid; }
+  .modal-overlay.report-print .report-sheet > div { break-inside: avoid; page-break-inside: avoid; }
+}
