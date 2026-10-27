@@ -360,4 +360,30 @@ function procesarMetricas(colaboradores) {
   };
 }
 
+/**
+ * =========================================================================
+ * 7. OBTENER RESULTADOS ANÓNIMOS DE CLIMA LABORAL (PEOPLE ANALYTICS)
+ * =========================================================================
+ * Consulta respuestas_clima_encuesta para análisis estadístico y gerencial.
+ */
+export async function obtenerRespuestasClima() {
+  if (!isConfigured) {
+    return { data: [], error: null };
+  }
+
+  try {
+    const { data, error } = await supabase
+      .from(TABLAS.RESPUESTAS)
+      .select('*')
+      .order('fecha_envio', { ascending: false });
+
+    if (error) throw error;
+    return { data: data || [], error: null };
+  } catch (err) {
+    console.error('Error al obtener respuestas de clima:', err);
+    return { data: [], error: err.message };
+  }
+}
+
+
 

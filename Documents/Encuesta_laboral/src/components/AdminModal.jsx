@@ -3,26 +3,32 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   X, Download, Upload, Shield, CheckCircle, AlertCircle, 
   HelpCircle, Users, BarChart3, Lock, RefreshCw, Search, Filter, 
-  CheckCircle2, Clock, Building2, MapPin, Briefcase, Check
+  CheckCircle2, Clock, Building2, MapPin, Briefcase, Check, TrendingUp
 } from 'lucide-react';
 import { 
   adminSubirPreguntas, 
   adminSubirPadronDNI, 
   adminObtenerTodasLasPreguntas,
   obtenerDashboardGerencial,
+  obtenerRespuestasClima,
   AREAS_DISPONIBLES 
 } from '../lib/supabase';
+import ClimateResultsView from './ClimateResultsView';
 
 export default function AdminModal({ isOpen, onClose, onQuestionsUpdated }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [pin, setPin] = useState('');
   const [pinError, setPinError] = useState('');
-  const [activeTab, setActiveTab] = useState('dashboard'); // 'dashboard' | 'preguntas' | 'padron'
+  const [activeTab, setActiveTab] = useState('dashboard'); // 'dashboard' | 'analytics' | 'padron' | 'preguntas'
   
-  // Datos del Dashboard
+  // Datos del Dashboard de Participación
   const [metrics, setMetrics] = useState(null);
   const [loadingMetrics, setLoadingMetrics] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+
+  // Datos de Resultados de Clima (People Analytics)
+  const [climateResponses, setClimateResponses] = useState([]);
+  const [loadingClimate, setLoadingClimate] = useState(false);
   const [filterStatus, setFilterStatus] = useState('todos'); // 'todos' | 'participaron' | 'pendientes'
   const [filterArea, setFilterArea] = useState('todas');
 
@@ -49,12 +55,20 @@ export default function AdminModal({ isOpen, onClose, onQuestionsUpdated }) {
 
   const cargarDatos = async () => {
     setLoadingMetrics(true);
-    const data = await obtenerDashboardGerencial();
-    setMetrics(data);
-    setLoadingMetrics(false);
+    setLoadingClimate(true);
 
-    const questions = await adminObtenerTodasLasPreguntas();
+    const [data, questions, resClima] = await Promise.all([
+      obtenerDashboardGerencial(),
+      adminObtenerTodasLasPreguntas(),
+      obtenerRespuestasClima()
+    ]);
+
+    setMetrics(data);
     setQuestionsList(questions || []);
+    setClimateResponses(resClima?.data || []);
+
+    setLoadingMetrics(false);
+    setLoadingClimate(false);
   };
 
   /**
@@ -321,44 +335,57 @@ export default function AdminModal({ isOpen, onClose, onQuestionsUpdated }) {
           /* Contenido del Panel Autenticado */
           <div className="flex-1 overflow-y-auto p-5 sm:p-6 space-y-6">
             {/* Pestañas de navegación */}
-            <div className="flex border-b border-slate-200 gap-6 text-xs sm:text-sm font-bold">
+            <div className="flex border-b border-slate-200 gap-4 sm:gap-6 text-xs sm:text-sm font-bold overflow-x-auto pb-0.5">
               <button
                 type="button"
                 onClick={() => setActiveTab('dashboard')}
-                className={`pb-3 flex items-center gap-2 transition-all cursor-pointer ${
+                className={`pb-3 flex items-center gap-2 transition-all cursor-pointer whitespace-nowrap ${
                   activeTab === 'dashboard'
                     ? 'border-b-2 border-slate-950 text-slate-950'
                     : 'text-slate-500 hover:text-slate-800'
                 }`}
               >
                 <BarChart3 className="w-4 h-4" />
-                Dashboard Gerencial (En Vivo)
+                Participación (En Vivo)
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setActiveTab('analytics')}
+                className={`pb-3 flex items-center gap-2 transition-all cursor-pointer whitespace-nowrap ${
+                  activeTab === 'analytics'
+                    ? 'border-b-2 border-slate-950 text-slate-950'
+                    : 'text-slate-500 hover:text-slate-800'
+                }`}
+              >
+                <TrendingUp className="w-4 h-4 text-emerald-600" />
+                Resultados de Clima (Analytics)
               </button>
 
               <button
                 type="button"
                 onClick={() => setActiveTab('padron')}
-                className={`pb-3 flex items-center gap-2 transition-all cursor-pointer ${
+                className={`pb-3 flex items-center gap-2 transition-all cursor-pointer whitespace-nowrap ${
                   activeTab === 'padron'
                     ? 'border-b-2 border-slate-950 text-slate-950'
                     : 'text-slate-500 hover:text-slate-800'
                 }`}
               >
                 <Users className="w-4 h-4" />
-                Padrón DNI y Colaboradores
+                Padrón DNI (107)
               </button>
 
               <button
                 type="button"
                 onClick={() => setActiveTab('preguntas')}
-                className={`pb-3 flex items-center gap-2 transition-all cursor-pointer ${
+                className={`pb-3 flex items-center gap-2 transition-all cursor-pointer whitespace-nowrap ${
                   activeTab === 'preguntas'
                     ? 'border-b-2 border-slate-950 text-slate-950'
                     : 'text-slate-500 hover:text-slate-800'
                 }`}
               >
                 <HelpCircle className="w-4 h-4" />
-                Preguntas de la Encuesta
+                Preguntas (43)
               </button>
             </div>
 
@@ -664,7 +691,23 @@ export default function AdminModal({ isOpen, onClose, onQuestionsUpdated }) {
             )}
 
             {/* =========================================================================
-                PESTAÑA 2: CARGA DE PADRÓN DNI (CON NOMBRE Y SEGMENTOS)
+                PESTAÑA: RESULTADOS DE CLIMA LABORAL (PEOPLE ANALYTICS)
+               ========================================================================= */}
+            {activeTab === 'analytics' && (
+              <ClimateResultsView 
+                rawResponses={climateResponses}
+                loading={loadingClimate}
+                onRefresh={async () => {
+                  setLoadingClimate(true);
+                  const res = await obtenerRespuestasClima();
+                  setClimateResponses(res?.data || []);
+                  setLoadingClimate(false);
+                }}
+              />
+            )}
+
+            {/* =========================================================================
+                PESTAÑA 3: CARGA DE PADRÓN DNI (CON NOMBRE Y SEGMENTOS)
                ========================================================================= */}
             {activeTab === 'padron' && (
               <div className="space-y-6">
