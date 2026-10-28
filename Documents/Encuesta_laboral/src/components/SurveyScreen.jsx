@@ -179,11 +179,16 @@ export default function SurveyScreen({ anonymousId, demographicMetadata, onSubmi
 
       {/* 3. BARRA DE PROGRESO SEGMENTADA EN 10 BLOQUES */}
       <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs">
-          <div className="font-bold text-slate-900 text-xs sm:text-sm">
-            Bloque {currentStep + 1} de {GRUPOS_SECCIONES.length} &bull; {currentGroup?.titulo}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="px-2.5 py-1 rounded-md bg-blue-50 text-[#345D9D] font-extrabold text-xs border border-blue-200/60 uppercase tracking-wide">
+              Bloque {currentStep + 1} de {GRUPOS_SECCIONES.length}
+            </span>
+            <span className="text-sm sm:text-base font-extrabold text-slate-900 tracking-tight">
+              {currentGroup?.titulo}
+            </span>
           </div>
-          <span className="text-slate-500 font-medium">
+          <span className="text-slate-500 font-semibold text-xs shrink-0">
             {answeredCount} de {totalQuestions} respondidas ({progressPercent}%)
           </span>
         </div>
@@ -212,17 +217,9 @@ export default function SurveyScreen({ anonymousId, demographicMetadata, onSubmi
             );
           })}
         </div>
-
-        {/* Nota contextual del bloque si aplica (Bloque 4 o Bloque 6) */}
-        {currentGroup?.nota && (
-          <div className="mt-2 p-3 sm:p-3.5 rounded-xl bg-blue-50/90 border border-blue-200/80 text-[#244372] text-xs sm:text-sm font-semibold flex items-center gap-2.5">
-            <AlertCircle className="w-4 h-4 text-[#345D9D] shrink-0" />
-            <span>{currentGroup.nota}</span>
-          </div>
-        )}
       </div>
 
-      {/* 4. PREGUNTAS DEL PASO ACTUAL (Matching Image 3) */}
+      {/* 4. PREGUNTAS DEL PASO ACTUAL */}
       <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
         <AnimatePresence mode="wait">
           <motion.div
@@ -233,6 +230,47 @@ export default function SurveyScreen({ anonymousId, demographicMetadata, onSubmi
             transition={{ duration: 0.2 }}
             className="space-y-4 sm:space-y-5"
           >
+            {/* ENCABEZADO ELEGANTE Y PROFESIONAL DEL BLOQUE */}
+            <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 text-left relative overflow-hidden">
+              {/* Barra lateral de acento corporativo */}
+              <div className="absolute top-0 bottom-0 left-0 w-1.5 bg-[#345D9D]" />
+
+              <div className="pl-2 sm:pl-3 space-y-2">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <div className="flex items-center gap-2.5">
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-md text-[11px] font-black uppercase tracking-wider bg-[#345D9D] text-white shadow-sm shadow-[#345D9D]/20">
+                      BLOQUE {currentStep + 1}
+                    </span>
+                    <span className="text-xs text-slate-400 font-medium">
+                      &bull; {stepQuestions.length} {stepQuestions.length === 1 ? 'pregunta' : 'preguntas'}
+                    </span>
+                  </div>
+
+                  <span className="text-xs font-semibold text-slate-500 bg-slate-100/80 border border-slate-200/70 px-2.5 py-1 rounded-full font-mono">
+                    {currentGroup?.rango ? `Preguntas ${currentGroup.rango[0]} a ${currentGroup.rango[1]}` : ''}
+                  </span>
+                </div>
+
+                {/* TÍTULO DESTACADO EN SU PROPIA LÍNEA */}
+                <h2 className="text-lg sm:text-2xl font-black text-slate-900 tracking-tight leading-snug pt-1">
+                  {currentGroup?.titulo}
+                </h2>
+
+                {currentGroup?.descripcion && (
+                  <p className="text-xs sm:text-sm text-slate-500 font-medium leading-relaxed">
+                    {currentGroup.descripcion}
+                  </p>
+                )}
+
+                {/* NOTA CONTEXTUAL ESPECIAL (Bloque 4 o Bloque 6) */}
+                {currentGroup?.nota && (
+                  <div className="mt-3 p-3.5 rounded-xl bg-gradient-to-r from-blue-50/90 to-indigo-50/50 border border-blue-200/80 text-[#1e3a66] text-xs sm:text-sm font-semibold flex items-center gap-2.5 shadow-xs">
+                    <AlertCircle className="w-4 h-4 text-[#345D9D] shrink-0" />
+                    <span>{currentGroup.nota}</span>
+                  </div>
+                )}
+              </div>
+            </div>
             {stepQuestions.map((q) => {
               const qKey = q.id || q.orden;
               const val = answers[qKey];
