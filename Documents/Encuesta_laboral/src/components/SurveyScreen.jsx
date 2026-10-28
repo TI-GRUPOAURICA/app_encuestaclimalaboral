@@ -179,15 +179,10 @@ export default function SurveyScreen({ anonymousId, demographicMetadata, onSubmi
 
       {/* 3. BARRA DE PROGRESO SEGMENTADA EN 10 BLOQUES */}
       <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
-          <div className="flex items-center gap-2 flex-wrap">
-            <span className="px-2.5 py-1 rounded-md bg-blue-50 text-[#345D9D] font-extrabold text-xs border border-blue-200/60 uppercase tracking-wide">
-              Bloque {currentStep + 1} de {GRUPOS_SECCIONES.length}
-            </span>
-            <span className="text-sm sm:text-base font-extrabold text-slate-900 tracking-tight">
-              {currentGroup?.titulo}
-            </span>
-          </div>
+        <div className="flex items-center justify-between gap-2 text-xs">
+          <span className="px-2.5 py-1 rounded-md bg-blue-50 text-[#345D9D] font-extrabold text-xs border border-blue-200/60 uppercase tracking-wide">
+            Bloque {currentStep + 1} de {GRUPOS_SECCIONES.length}
+          </span>
           <span className="text-slate-500 font-semibold text-xs shrink-0">
             {answeredCount} de {totalQuestions} respondidas ({progressPercent}%)
           </span>
