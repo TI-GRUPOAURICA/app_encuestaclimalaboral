@@ -676,7 +676,7 @@ export default function ClimateResultsView({ rawResponses = [], loading = false,
                         Employee Net Promoter Score (eNPS)
                       </h4>
                       <p className="text-xs text-slate-500">
-                        Calculado a partir de la Pregunta 39: <em>«¿Qué tan probable es que recomiendes la empresa como un buen lugar para trabajar?» (Escala 0 al 10)</em>.
+                        Calculado a partir de la Pregunta 39: <em>«¿Qué tan probable es que recomiendes Grupo Aurica como un buen lugar para trabajar?» (Escala 0 al 10)</em>.
                       </p>
                     </div>
 
