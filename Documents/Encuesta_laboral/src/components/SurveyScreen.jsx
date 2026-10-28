@@ -177,19 +177,19 @@ export default function SurveyScreen({ anonymousId, demographicMetadata, onSubmi
         </div>
       </div>
 
-      {/* 3. BARRA DE PROGRESO SEGMENTADA EN 5 PASOS */}
+      {/* 3. BARRA DE PROGRESO SEGMENTADA EN 10 BLOQUES */}
       <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs">
           <div className="font-bold text-slate-900 text-xs sm:text-sm">
-            Sección {currentStep + 1} de {GRUPOS_SECCIONES.length} &bull; {currentGroup.titulo}
+            Bloque {currentStep + 1} de {GRUPOS_SECCIONES.length} &bull; {currentGroup?.titulo}
           </div>
           <span className="text-slate-500 font-medium">
             {answeredCount} de {totalQuestions} respondidas ({progressPercent}%)
           </span>
         </div>
 
-        {/* 5 Segmentos de barra de progreso */}
-        <div className="grid grid-cols-5 gap-1.5 sm:gap-2">
+        {/* 10 Segmentos de barra de progreso */}
+        <div className="grid grid-cols-5 sm:grid-cols-10 gap-1.5 sm:gap-2">
           {GRUPOS_SECCIONES.map((_, idx) => {
             const isCompleted = idx < currentStep;
             const isCurrent = idx === currentStep;
@@ -212,6 +212,14 @@ export default function SurveyScreen({ anonymousId, demographicMetadata, onSubmi
             );
           })}
         </div>
+
+        {/* Nota contextual del bloque si aplica (Bloque 4 o Bloque 6) */}
+        {currentGroup?.nota && (
+          <div className="mt-2 p-3 sm:p-3.5 rounded-xl bg-blue-50/90 border border-blue-200/80 text-[#244372] text-xs sm:text-sm font-semibold flex items-center gap-2.5">
+            <AlertCircle className="w-4 h-4 text-[#345D9D] shrink-0" />
+            <span>{currentGroup.nota}</span>
+          </div>
+        )}
       </div>
 
       {/* 4. PREGUNTAS DEL PASO ACTUAL (Matching Image 3) */}

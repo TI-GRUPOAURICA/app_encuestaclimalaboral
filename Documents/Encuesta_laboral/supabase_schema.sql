@@ -83,67 +83,67 @@ CREATE POLICY "Permitir lectura respuestas encuesta" ON public.respuestas_clima_
 INSERT INTO public.preguntas_encuesta (orden, seccion, titulo, descripcion, tipo, opciones, max_opciones, es_requerida, activa)
 VALUES
 -- CONDICIONES Y RECURSOS (1 a 4)
-(1, 'Condiciones y Recursos', 'El ambiente físico de mi área de trabajo es seguro, adecuado y cómodo.', NULL, 'escala_1_5', NULL, 1, true, true),
-(2, 'Condiciones y Recursos', 'Cuento con los equipos, herramientas y materiales necesarios para realizar bien mi trabajo.', NULL, 'escala_1_5', NULL, 1, true, true),
-(3, 'Condiciones y Recursos', 'Las condiciones ambientales de mi lugar de trabajo (temperatura, ruido, iluminación y ventilación) son adecuadas para realizar mis funciones.', NULL, 'escala_1_5', NULL, 1, true, true),
-(4, 'Condiciones y Recursos', 'Los espacios de trabajo y áreas comunes que utilizo se mantienen limpios y en condiciones adecuadas.', NULL, 'escala_1_5', NULL, 1, true, true),
+(1, 'Condiciones y recursos', 'El ambiente físico de mi área de trabajo es seguro, adecuado y cómodo.', NULL, 'escala_1_5', NULL, 1, true, true),
+(2, 'Condiciones y recursos', 'Cuento con los equipos, herramientas y materiales necesarios para realizar bien mi trabajo.', NULL, 'escala_1_5', NULL, 1, true, true),
+(3, 'Condiciones y recursos', 'Las condiciones ambientales de mi lugar de trabajo (temperatura, ruido, iluminación y ventilación) son adecuadas para realizar mis funciones.', NULL, 'escala_1_5', NULL, 1, true, true),
+(4, 'Condiciones y recursos', 'Los espacios de trabajo y áreas comunes que utilizo se mantienen limpios y en condiciones adecuadas.', NULL, 'escala_1_5', NULL, 1, true, true),
 
 -- ORGANIZACIÓN Y CARGA DE TRABAJO (5 a 7)
-(5, 'Organización y Carga de Trabajo', 'La carga de trabajo que tengo asignada es razonable para cumplir adecuadamente mis funciones.', NULL, 'escala_1_5', NULL, 1, true, true),
-(6, 'Organización y Carga de Trabajo', 'Tengo claridad sobre mis funciones, responsabilidades y prioridades.', NULL, 'escala_1_5', NULL, 1, true, true),
-(7, 'Organización y Carga de Trabajo', 'La distribución del trabajo en mi área permite cumplir las responsabilidades de manera adecuada.', NULL, 'escala_1_5', NULL, 1, true, true),
+(5, 'Organización y carga de trabajo', 'La carga de trabajo que tengo asignada es razonable para cumplir adecuadamente mis funciones.', NULL, 'escala_1_5', NULL, 1, true, true),
+(6, 'Organización y carga de trabajo', 'Tengo claridad sobre mis funciones, responsabilidades y prioridades.', NULL, 'escala_1_5', NULL, 1, true, true),
+(7, 'Organización y carga de trabajo', 'La distribución del trabajo en mi área permite cumplir las responsabilidades de manera adecuada.', NULL, 'escala_1_5', NULL, 1, true, true),
 
 -- COMUNICACIÓN Y COORDINACIÓN INTERNA (8 a 11)
-(8, 'Comunicación y Coordinación Interna', 'Recibo información clara y oportuna sobre los cambios y decisiones de la empresa que afectan mi trabajo.', NULL, 'escala_1_5', NULL, 1, true, true),
-(9, 'Comunicación y Coordinación Interna', 'Puedo expresar mis ideas, sugerencias o desacuerdos sin temor a consecuencias negativas.', NULL, 'escala_1_5', NULL, 1, true, true),
-(10, 'Comunicación y Coordinación Interna', 'Existe buena comunicación y coordinación entre mi área y las demás áreas con las que trabajo.', NULL, 'escala_1_5', NULL, 1, true, true),
-(11, 'Comunicación y Coordinación Interna', 'Sé a quién acudir cuando necesito información, apoyo o resolver un problema relacionado con mi trabajo.', NULL, 'escala_1_5', NULL, 1, true, true),
+(8, 'Comunicación y coordinación interna', 'Recibo información clara y oportuna sobre los cambios y decisiones de la empresa que afectan mi trabajo.', NULL, 'escala_1_5', NULL, 1, true, true),
+(9, 'Comunicación y coordinación interna', 'Puedo expresar mis ideas, sugerencias o desacuerdos sin temor a consecuencias negativas.', NULL, 'escala_1_5', NULL, 1, true, true),
+(10, 'Comunicación y coordinación interna', 'Existe buena comunicación y coordinación entre mi área y las demás áreas con las que trabajo.', NULL, 'escala_1_5', NULL, 1, true, true),
+(11, 'Comunicación y coordinación interna', 'Sé a quién acudir cuando necesito información, apoyo o resolver un problema relacionado con mi trabajo.', NULL, 'escala_1_5', NULL, 1, true, true),
 
--- LIDERAZGO Y SUPERVISIÓN (12 a 17)
-(12, 'Liderazgo y Supervisión', 'Mi jefe directo me trata con respeto y promueve un ambiente de confianza.', 'Piensa en tu jefe o supervisor directo.', 'escala_1_5', NULL, 1, true, true),
-(13, 'Liderazgo y Supervisión', 'Mi jefe comunica con claridad las expectativas y prioridades del trabajo.', 'Piensa en tu jefe o supervisor directo.', 'escala_1_5', NULL, 1, true, true),
-(14, 'Liderazgo y Supervisión', 'Mi jefe me brinda retroalimentación útil sobre mi trabajo.', 'Piensa en tu jefe o supervisor directo.', 'escala_1_5', NULL, 1, true, true),
-(15, 'Liderazgo y Supervisión', 'Mi jefe organiza y distribuye el trabajo de manera adecuada.', 'Piensa en tu jefe o supervisor directo.', 'escala_1_5', NULL, 1, true, true),
-(16, 'Liderazgo y Supervisión', 'Mi jefe escucha las opiniones y sugerencias del equipo.', 'Piensa en tu jefe o supervisor directo.', 'escala_1_5', NULL, 1, true, true),
-(17, 'Liderazgo y Supervisión', 'Las decisiones de mi jefe se aplican de manera justa y consistente.', 'Piensa en tu jefe o supervisor directo.', 'escala_1_5', NULL, 1, true, true),
+-- LIDERAZGO Y SUPERVISIÓN (12 a 17) - Nota: Piensa en tu jefe o supervisor directo.
+(12, 'Liderazgo y supervisión', 'Mi jefe directo me trata con respeto y promueve un ambiente de confianza.', 'Piensa en tu jefe o supervisor directo.', 'escala_1_5', NULL, 1, true, true),
+(13, 'Liderazgo y supervisión', 'Mi jefe comunica con claridad las expectativas y prioridades del trabajo.', 'Piensa en tu jefe o supervisor directo.', 'escala_1_5', NULL, 1, true, true),
+(14, 'Liderazgo y supervisión', 'Mi jefe me brinda retroalimentación útil sobre mi trabajo.', 'Piensa en tu jefe o supervisor directo.', 'escala_1_5', NULL, 1, true, true),
+(15, 'Liderazgo y supervisión', 'Mi jefe organiza y distribuye el trabajo de manera adecuada.', 'Piensa en tu jefe o supervisor directo.', 'escala_1_5', NULL, 1, true, true),
+(16, 'Liderazgo y supervisión', 'Mi jefe escucha las opiniones y sugerencias del equipo.', 'Piensa en tu jefe o supervisor directo.', 'escala_1_5', NULL, 1, true, true),
+(17, 'Liderazgo y supervisión', 'Las decisiones de mi jefe se aplican de manera justa y consistente.', 'Piensa en tu jefe o supervisor directo.', 'escala_1_5', NULL, 1, true, true),
 
 -- RESPETO Y CONVIVENCIA (18 a 22)
-(18, 'Respeto y Convivencia', 'En mi área existe un ambiente de compañerismo y respeto.', NULL, 'escala_1_5', NULL, 1, true, true),
-(19, 'Respeto y Convivencia', 'Las personas son tratadas con respeto, independientemente de su cargo, área u otras características personales.', NULL, 'escala_1_5', NULL, 1, true, true),
-(20, 'Respeto y Convivencia', 'Puedo plantear dudas, reconocer errores o expresar preocupaciones sin temor a ser ridiculizado/a o tratado/a injustamente.', NULL, 'escala_1_5', NULL, 1, true, true),
-(21, 'Respeto y Convivencia', 'La empresa promueve un ambiente de respeto, inclusión y equidad.', NULL, 'escala_1_5', NULL, 1, true, true),
-(22, 'Respeto y Convivencia', 'Considero que las decisiones relacionadas con el personal se toman de manera justa.', NULL, 'escala_1_5', NULL, 1, true, true),
+(18, 'Respeto y convivencia', 'En mi área existe un ambiente de compañerismo y respeto.', NULL, 'escala_1_5', NULL, 1, true, true),
+(19, 'Respeto y convivencia', 'Las personas son tratadas con respeto, independientemente de su cargo, área u otras características personales.', NULL, 'escala_1_5', NULL, 1, true, true),
+(20, 'Respeto y convivencia', 'Puedo plantear dudas, reconocer errores o expresar preocupaciones sin temor a ser ridiculizado/a o tratado/a injustamente.', NULL, 'escala_1_5', NULL, 1, true, true),
+(21, 'Respeto y convivencia', 'La empresa promueve un ambiente de respeto, inclusión y equidad.', NULL, 'escala_1_5', NULL, 1, true, true),
+(22, 'Respeto y convivencia', 'Considero que las decisiones relacionadas con el personal se toman de manera justa.', NULL, 'escala_1_5', NULL, 1, true, true),
 
--- TRATO EN EL TRABAJO (23 a 29)
-(23, 'Trato en el Trabajo', 'En los últimos seis meses, ¿has experimentado personalmente conductas agresivas, humillantes, intimidantes o de maltrato en el trabajo?', 'Nos gustaría contar con tu feedback, recuerda que es 100% anónimo.', 'opcion_simple', '["Sí", "No", "No estoy seguro/a", "Prefiero no responder"]'::jsonb, 1, true, true),
-(24, 'Trato en el Trabajo', 'En los últimos seis meses, ¿has presenciado conductas agresivas, humillantes, intimidantes o de maltrato hacia otra persona en el trabajo?', 'Nos gustaría contar con tu feedback, recuerda que es 100% anónimo.', 'opcion_simple', '["Sí", "No", "No estoy seguro/a", "Prefiero no responder"]'::jsonb, 1, true, true),
-(25, 'Trato en el Trabajo', 'La situación ocurrió principalmente por parte de:', 'Responde solo si marcaste «Sí» en alguna de las preguntas anteriores.', 'opcion_simple', '["Jefe/supervisor", "Compañero/a", "Persona a cargo", "Tercero", "Ninguno"]'::jsonb, 1, false, true),
-(26, 'Trato en el Trabajo', '¿Sabes a quién acudir o qué canal utilizar si necesitas reportar una situación de hostigamiento, maltrato o discriminación?', NULL, 'opcion_simple', '["Sí", "No", "No estoy seguro/a", "Prefiero no responder"]'::jsonb, 1, true, true),
-(27, 'Trato en el Trabajo', 'Confío en que podría reportar una situación de maltrato, acoso o discriminación sin temor a represalias.', NULL, 'escala_1_5', NULL, 1, true, true),
-(28, 'Trato en el Trabajo', 'Considero que la empresa toma en serio estos casos y los atiende con confidencialidad y oportunidad.', NULL, 'escala_1_5', NULL, 1, true, true),
-(29, 'Trato en el Trabajo', 'Si deseas, puedes dejar un comentario confidencial sobre alguna situación de trato o convivencia laboral.', 'Espacio opcional y seguro.', 'texto_libre', NULL, 1, false, true),
+-- TRATO EN EL TRABAJO (23 a 29) - Nota: Nos gustaría contar con tu feedback, recuerda que es confidencial.
+(23, 'Trato en el trabajo', 'En los últimos seis meses, ¿has experimentado personalmente conductas agresivas, humillantes, intimidantes o de maltrato en el trabajo?', 'Nos gustaría contar con tu feedback, recuerda que es confidencial.', 'opcion_simple', '["Sí", "No", "No estoy seguro/a", "Prefiero no responder"]'::jsonb, 1, true, true),
+(24, 'Trato en el trabajo', 'En los últimos seis meses, ¿has presenciado conductas agresivas, humillantes, intimidantes o de maltrato hacia otra persona en el trabajo?', 'Nos gustaría contar con tu feedback, recuerda que es confidencial.', 'opcion_simple', '["Sí", "No", "No estoy seguro/a", "Prefiero no responder"]'::jsonb, 1, true, true),
+(25, 'Trato en el trabajo', 'La situación ocurrió principalmente por parte de: (Responde solo si marcaste «Sí» en la pregunta 27 o 28.)', 'Responde solo si marcaste «Sí» en alguna de las preguntas anteriores.', 'opcion_simple', '["Jefe/supervisor", "Compañero/a", "Persona a cargo", "Tercero", "Ninguno"]'::jsonb, 1, false, true),
+(26, 'Trato en el trabajo', '¿Sabes a quién acudir o qué canal utilizar si necesitas reportar una situación de hostigamiento, maltrato o discriminación?', 'Nos gustaría contar con tu feedback, recuerda que es confidencial.', 'opcion_simple', '["Sí", "No", "No estoy seguro/a", "Prefiero no responder"]'::jsonb, 1, true, true),
+(27, 'Trato en el trabajo', 'Confío en que podría reportar una situación de maltrato, acoso o discriminación sin temor a represalias.', 'Nos gustaría contar con tu feedback, recuerda que es confidencial.', 'escala_1_5', NULL, 1, true, true),
+(28, 'Trato en el trabajo', 'Considero que la empresa toma en serio estos casos y los atiende con confidencialidad y oportunidad.', 'Nos gustaría contar con tu feedback, recuerda que es confidencial.', 'escala_1_5', NULL, 1, true, true),
+(29, 'Trato en el trabajo', 'Si deseas, puedes dejar un comentario confidencial para RR. HH. sobre alguna situación de trato o convivencia laboral.', 'Nos gustaría contar con tu feedback, recuerda que es confidencial.', 'texto_libre', NULL, 1, false, true),
 
--- SEGURIDAD Y SALUD OCUPACIONAL (30 a 31)
-(30, 'Seguridad y Salud Ocupacional', 'Me siento físicamente seguro/a en mi lugar de trabajo, incluyendo oficinas y espacios comunes.', NULL, 'escala_1_5', NULL, 1, true, true),
-(31, 'Seguridad y Salud Ocupacional', 'Las normas y procedimientos de seguridad y salud ocupacional se comunican claramente y se aplican de manera consistente.', NULL, 'escala_1_5', NULL, 1, true, true),
+-- SEGURIDAD Y DISCIPLINA (30 a 31)
+(30, 'Seguridad y disciplina', 'Me siento físicamente seguro/a en mi lugar de trabajo, incluyendo oficinas y espacios comunes.', NULL, 'escala_1_5', NULL, 1, true, true),
+(31, 'Seguridad y disciplina', 'Las normas y procedimientos de seguridad y salud ocupacional se comunican claramente y se aplican de manera consistente.', NULL, 'escala_1_5', NULL, 1, true, true),
 
 -- DESARROLLO Y RECONOCIMIENTO (32 a 34)
-(32, 'Desarrollo y Reconocimiento', 'Tengo oportunidades de aprendizaje y capacitación relacionadas con mi puesto.', NULL, 'escala_1_5', NULL, 1, true, true),
-(33, 'Desarrollo y Reconocimiento', 'Percibo oportunidades de crecimiento y desarrollo dentro de la empresa.', NULL, 'escala_1_5', NULL, 1, true, true),
-(34, 'Desarrollo y Reconocimiento', 'Siento que mi esfuerzo y el trabajo bien realizado son valorados.', NULL, 'escala_1_5', NULL, 1, true, true),
+(32, 'Desarrollo y reconocimiento', 'Tengo oportunidades de aprendizaje y capacitación relacionadas con mi puesto.', NULL, 'escala_1_5', NULL, 1, true, true),
+(33, 'Desarrollo y reconocimiento', 'Percibo oportunidades de crecimiento y desarrollo dentro de la empresa.', NULL, 'escala_1_5', NULL, 1, true, true),
+(34, 'Desarrollo y reconocimiento', 'Siento que mi esfuerzo y el trabajo bien realizado son valorados.', NULL, 'escala_1_5', NULL, 1, true, true),
 
 -- PERTENENCIA Y COMPROMISO (35 a 39)
-(35, 'Pertenencia y Compromiso', 'Conozco los objetivos de la empresa y entiendo cómo mi trabajo contribuye a lograrlos.', NULL, 'escala_1_5', NULL, 1, true, true),
-(36, 'Pertenencia y Compromiso', 'Me siento orgulloso/a de trabajar en la empresa.', NULL, 'escala_1_5', NULL, 1, true, true),
-(37, 'Pertenencia y Compromiso', 'Me siento comprometido/a con los objetivos de mi área y de la empresa.', NULL, 'escala_1_5', NULL, 1, true, true),
-(38, 'Pertenencia y Compromiso', 'Me gustaría continuar trabajando en la empresa durante los próximos años.', NULL, 'escala_1_5', NULL, 1, true, true),
-(39, 'Pertenencia y Compromiso', '¿Qué tan probable es que recomiendes la empresa como un buen lugar para trabajar?', 'En una escala de 0 (Nada probable) a 10 (Totalmente probable).', 'escala_0_10', NULL, 1, true, true),
+(35, 'Pertenencia y compromiso', 'Conozco los objetivos de la empresa y entiendo cómo mi trabajo contribuye a lograrlos.', NULL, 'escala_1_5', NULL, 1, true, true),
+(36, 'Pertenencia y compromiso', 'Me siento orgulloso/a de trabajar en Grupo Aurica.', NULL, 'escala_1_5', NULL, 1, true, true),
+(37, 'Pertenencia y compromiso', 'Me siento comprometido/a con los objetivos de mi área y de la empresa.', NULL, 'escala_1_5', NULL, 1, true, true),
+(38, 'Pertenencia y compromiso', 'Me gustaría continuar trabajando en Grupo Aurica durante los próximos años.', NULL, 'escala_1_5', NULL, 1, true, true),
+(39, 'Pertenencia y compromiso', 'En una escala de 0 a 10, ¿qué tan probable es que recomiendes Grupo Aurica como un buen lugar para trabajar?', 'En una escala de 0 (Nada probable) a 10 (Totalmente probable).', 'escala_0_10', '["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]'::jsonb, 1, true, true),
 
--- PRIORIDADES Y SUGERENCIAS (40 a 43)
-(40, 'Prioridades y Sugerencias', '¿Cuáles son las DOS dimensiones que consideras más importante que la empresa debería mejorar?', 'Selecciona hasta 2 dimensiones prioritarias.', 'opcion_multiple', '["Condiciones y recursos", "Organización y carga", "Comunicación y coordinación", "Liderazgo y Supervisión", "Respeto y convivencia", "Trato en el trabajo", "Seguridad y disciplina", "Desarrollo y reconocimiento", "Pertenencia y compromiso"]'::jsonb, 2, true, true),
-(41, 'Prioridades y Sugerencias', '¿Qué es lo que más valoras actualmente de trabajar en la empresa?', NULL, 'texto_libre', NULL, 1, false, true),
-(42, 'Prioridades y Sugerencias', 'Si pudieras cambiar una sola cosa para mejorar tu experiencia de trabajo, ¿qué cambiarías?', NULL, 'texto_libre', NULL, 1, false, true),
-(43, 'Prioridades y Sugerencias', '¿Qué acción concreta consideras que debería priorizar la empresa para mejorar el clima laboral?', NULL, 'texto_libre', NULL, 1, false, true)
+-- PRIORIDADES Y COMENTARIOS (40 a 43)
+(40, 'Prioridades y comentarios', '¿Cuáles son las DOS dimensiones que consideras más importante que Grupo Aurica debería mejorar?', 'Selecciona hasta 2 dimensiones prioritarias.', 'opcion_multiple', '["Condiciones y recursos", "Organización y carga", "Comunicación y coordinación", "Liderazgo y Supervisión", "Respeto y convivencia", "Trato en el trabajo", "Seguridad y disciplina", "Desarrollo y reconocimiento", "Pertenencia y compromiso"]'::jsonb, 2, true, true),
+(41, 'Prioridades y comentarios', '¿Qué es lo que más valoras actualmente de trabajar en Grupo Aurica?', NULL, 'texto_libre', NULL, 1, false, true),
+(42, 'Prioridades y comentarios', 'Si pudieras cambiar una sola cosa para mejorar tu experiencia de trabajo, ¿qué cambiarías?', NULL, 'texto_libre', NULL, 1, false, true),
+(43, 'Prioridades y comentarios', '¿Qué acción concreta consideras que debería priorizar la empresa para mejorar el clima laboral?', NULL, 'texto_libre', NULL, 1, false, true)
 ON CONFLICT (orden) DO UPDATE 
 SET seccion = EXCLUDED.seccion,
     titulo = EXCLUDED.titulo,

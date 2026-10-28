@@ -57,7 +57,7 @@ const DIMENSIONES = [
   },
   { 
     id: 'seguridad', 
-    nombre: 'Seguridad y Salud Ocupacional', 
+    nombre: 'Seguridad y disciplina', 
     preguntasIds: [30, 31],
     desc: 'Seguridad física y consistencia en normas de SSO.' 
   },

@@ -102,10 +102,11 @@ export default function AdminModal({ isOpen, onClose, onQuestionsUpdated }) {
   const handleDownloadQuestionsTemplate = () => {
     const csvContent = 
 `orden,seccion,titulo,descripcion,tipo,es_requerida
-1,Condiciones y Recursos,El ambiente físico de mi área de trabajo es seguro adecuado y cómodo,,escala_1_5,true
-2,Condiciones y Recursos,Cuento con los equipos herramientas y materiales necesarios,,escala_1_5,true
-39,Pertenencia y Compromiso,Qué tan probable es que recomiendes la empresa como un buen lugar para trabajar,Escala 0 al 10,escala_0_10,true
-43,Prioridades y Sugerencias,Qué acción concreta consideras que debería priorizar la empresa,,texto_libre,false`;
+1,Condiciones y recursos,El ambiente físico de mi área de trabajo es seguro adecuado y cómodo,,escala_1_5,true
+12,Liderazgo y supervisión,Mi jefe directo me trata con respeto y promueve un ambiente de confianza,Piensa en tu jefe o supervisor directo.,escala_1_5,true
+30,Seguridad y disciplina,Me siento físicamente seguro/a en mi lugar de trabajo incluyendo oficinas y espacios comunes,,escala_1_5,true
+39,Pertenencia y compromiso,En una escala de 0 a 10 qué tan probable es que recomiendes Grupo Aurica como un buen lugar para trabajar,Escala 0 al 10,escala_0_10,true
+40,Prioridades y comentarios,Cuáles son las DOS dimensiones que consideras más importante que Grupo Aurica debería mejorar,Selecciona hasta 2 dimensiones,opcion_multiple,true`;
 
     const blob = new Blob(["\uFEFF" + csvContent], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
