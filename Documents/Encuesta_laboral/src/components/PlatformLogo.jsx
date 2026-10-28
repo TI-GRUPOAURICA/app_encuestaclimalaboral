@@ -9,7 +9,7 @@ export function GridLogoIcon({ className = "w-9 h-9" }) {
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
     >
-      <rect width="24" height="24" rx="6.5" fill="#09090b" />
+      <rect width="24" height="24" rx="6.5" fill="#345D9D" />
       <circle cx="6.5" cy="6.5" r="1.55" fill="white" />
       <circle cx="12" cy="6.5" r="1.55" fill="white" />
       <circle cx="17.5" cy="6.5" r="1.55" fill="white" />

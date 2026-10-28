@@ -134,8 +134,8 @@ export default function ValidationScreen({ onValidate }) {
                 autoFocus
                 className={`w-full text-base sm:text-lg font-medium py-3 px-4 rounded-xl border transition-all duration-150 outline-none placeholder:text-slate-400 ${
                   isDniValid
-                    ? 'border-slate-900 bg-white text-slate-900 ring-2 ring-slate-900/10'
-                    : 'border-slate-300 bg-white text-slate-900 focus:border-slate-900 focus:ring-4 focus:ring-slate-900/10'
+                    ? 'border-[#345D9D] bg-white text-slate-900 ring-2 ring-[#345D9D]/15'
+                    : 'border-slate-300 bg-white text-slate-900 focus:border-[#345D9D] focus:ring-4 focus:ring-[#345D9D]/15'
                 }`}
               />
 
@@ -169,7 +169,7 @@ export default function ValidationScreen({ onValidate }) {
                     if (errorMsg) setErrorMsg('');
                     if (warningMsg) setWarningMsg('');
                   }}
-                  className="mt-0.5 w-4 h-4 rounded border-slate-300 text-black focus:ring-slate-900 cursor-pointer accent-black"
+                  className="mt-0.5 w-4 h-4 rounded border-slate-300 text-[#345D9D] focus:ring-[#345D9D] cursor-pointer accent-[#345D9D]"
                 />
                 <span className="text-xs sm:text-[13px] text-slate-700 font-normal leading-snug group-hover:text-slate-900">
                   Entiendo que mi DNI actúa solo como llave de acceso y que mis respuestas no serán rastreables.
@@ -200,13 +200,13 @@ export default function ValidationScreen({ onValidate }) {
               </motion.div>
             )}
 
-            {/* Botón Principal: Negro sólido ("en lugar de ese azul, usemos el negro para todo") */}
+            {/* Botón Principal: Azul corporativo #345D9D */}
             <button
               type="submit"
               disabled={!canSubmit}
               className={`w-full py-3.5 px-6 rounded-xl font-bold text-xs sm:text-sm tracking-wide flex items-center justify-center gap-2 transition-all duration-150 ${
                 canSubmit
-                  ? 'bg-slate-950 hover:bg-black text-white shadow-sm active:scale-[0.99] cursor-pointer'
+                  ? 'bg-[#345D9D] hover:bg-[#284a7e] text-white shadow-md shadow-[#345D9D]/20 active:scale-[0.99] cursor-pointer'
                   : 'bg-slate-100 text-slate-400 border border-slate-200 cursor-not-allowed'
               }`}
             >

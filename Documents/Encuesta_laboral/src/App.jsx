@@ -27,7 +27,7 @@ export default function App() {
   // Asegurar fondo corporativo claro, limpio y legible en todo el documento
   useEffect(() => {
     document.documentElement.classList.remove('dark');
-    document.body.className = 'min-h-full bg-slate-50 text-slate-900 font-sans antialiased selection:bg-slate-900 selection:text-white';
+    document.body.className = 'min-h-full bg-slate-50 text-slate-900 font-sans antialiased selection:bg-[#345D9D] selection:text-white';
   }, []);
 
   // Paso 1 -> Paso 2: Usuario valida su DNI y entra al túnel
@@ -101,7 +101,7 @@ export default function App() {
 
   return (
     <div className={`min-h-screen flex flex-col justify-between transition-colors duration-500 ${
-      isSurvey ? 'bg-[#181a20]' : 'bg-slate-50'
+      isSurvey ? 'bg-[#182a46]' : 'bg-slate-50'
     }`}>
       {/* Contenido principal centrado */}
       <main className="flex-1 flex items-center justify-center p-3 sm:p-6 lg:p-8">
@@ -142,7 +142,7 @@ export default function App() {
       {/* Pie de página neutral adaptable */}
       <footer className={`py-5 px-6 border-t transition-colors duration-500 ${
         isSurvey 
-          ? 'border-slate-800 bg-[#121316]/90 text-slate-400' 
+          ? 'border-[#263e66] bg-[#122036]/90 text-blue-200/70' 
           : 'border-slate-200/60 bg-white/50 text-slate-500 backdrop-blur-sm'
       }`}>
         <div className="max-w-4xl mx-auto flex items-center justify-center gap-2 text-xs">

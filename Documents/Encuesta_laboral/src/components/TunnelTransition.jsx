@@ -35,8 +35,8 @@ export default function TunnelTransition({ dni, onTunnelComplete }) {
       icon: null,
       isIncognito: true,
       color: "text-white",
-      bgColor: "bg-slate-950",
-      borderColor: "border-slate-800",
+      bgColor: "bg-[#254577]",
+      borderColor: "border-[#345D9D]/50",
       progress: 100,
     },
   ];
@@ -82,7 +82,7 @@ export default function TunnelTransition({ dni, onTunnelComplete }) {
             className={`absolute inset-0 rounded-full border-2 transition-colors duration-300 ${
               stepIndex === 2 
                 ? 'border-slate-200 border-t-emerald-500 border-r-emerald-500' 
-                : 'border-slate-200 border-t-slate-950 border-r-slate-950'
+                : 'border-slate-200 border-t-[#345D9D] border-r-[#345D9D]'
             }`}
           />
 
@@ -135,9 +135,7 @@ export default function TunnelTransition({ dni, onTunnelComplete }) {
         <div className="space-y-2 max-w-sm mx-auto">
           <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden border border-slate-200">
             <div
-              className={`h-full rounded-full transition-all duration-300 ${
-                stepIndex === 2 ? 'bg-slate-950' : 'bg-slate-900'
-              }`}
+              className="h-full rounded-full transition-all duration-300 bg-[#345D9D]"
               style={{ width: `${currentStep.progress}%` }}
             />
           </div>
@@ -162,7 +160,7 @@ export default function TunnelTransition({ dni, onTunnelComplete }) {
 
             <div className={`px-3.5 py-1.5 rounded-xl border font-semibold transition-all duration-200 flex items-center gap-2 ${
               stepIndex === 2 
-                ? 'bg-slate-950 border-slate-900 text-white shadow-sm' 
+                ? 'bg-[#254577] border-[#345D9D]/60 text-white shadow-sm' 
                 : 'bg-slate-50 border-slate-200 text-slate-400'
             }`}>
               {stepIndex === 2 ? (

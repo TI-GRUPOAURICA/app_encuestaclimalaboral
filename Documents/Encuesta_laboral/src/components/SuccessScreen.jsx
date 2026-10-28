@@ -61,7 +61,7 @@ export default function SuccessScreen({ onReset }) {
           <button
             type="button"
             onClick={onReset}
-            className="w-full py-4 px-6 rounded-2xl font-bold text-sm sm:text-base bg-slate-900 hover:bg-slate-800 text-white transition-colors duration-150 flex items-center justify-center gap-2 cursor-pointer"
+            className="w-full py-4 px-6 rounded-2xl font-bold text-sm sm:text-base bg-[#345D9D] hover:bg-[#284a7e] text-white transition-colors duration-150 flex items-center justify-center gap-2 cursor-pointer shadow-md shadow-[#345D9D]/20"
           >
             <RefreshCw className="w-4 h-4" />
             <span>Volver a la pantalla inicial</span>

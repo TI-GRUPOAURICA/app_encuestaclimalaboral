@@ -355,7 +355,7 @@ export default function ClimateResultsView({ rawResponses = [], loading = false,
           <button
             onClick={handleDownloadCSV}
             disabled={dataBase.length === 0}
-            className="flex items-center gap-1.5 px-4 py-2 text-xs font-bold rounded-lg bg-slate-900 text-white hover:bg-black transition-colors disabled:opacity-40 shadow-sm"
+            className="flex items-center gap-1.5 px-4 py-2 text-xs font-bold rounded-lg bg-[#345D9D] hover:bg-[#284a7e] text-white transition-colors disabled:opacity-40 shadow-md shadow-[#345D9D]/20 cursor-pointer"
           >
             <Download className="w-3.5 h-3.5 stroke-[2.5]" />
             <span>Descargar Matriz CSV</span>
@@ -401,7 +401,7 @@ export default function ClimateResultsView({ rawResponses = [], loading = false,
                 <select
                   value={selectedSede}
                   onChange={(e) => setSelectedSede(e.target.value)}
-                  className="w-full bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 text-slate-800 font-medium focus:outline-none focus:border-slate-900"
+                  className="w-full bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 text-slate-800 font-medium focus:outline-none focus:border-[#345D9D] focus:ring-1 focus:ring-[#345D9D]/20"
                 >
                   <option value="todas">Todas las Sedes</option>
                   <option value="Lima">Lima</option>
@@ -416,7 +416,7 @@ export default function ClimateResultsView({ rawResponses = [], loading = false,
                 <select
                   value={selectedArea}
                   onChange={(e) => setSelectedArea(e.target.value)}
-                  className="w-full bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 text-slate-800 font-medium focus:outline-none focus:border-slate-900 truncate"
+                  className="w-full bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 text-slate-800 font-medium focus:outline-none focus:border-[#345D9D] focus:ring-1 focus:ring-[#345D9D]/20 truncate"
                 >
                   <option value="todas">Todas las Áreas</option>
                   {areasUnicas.map(a => (
@@ -431,7 +431,7 @@ export default function ClimateResultsView({ rawResponses = [], loading = false,
                 <select
                   value={selectedPuesto}
                   onChange={(e) => setSelectedPuesto(e.target.value)}
-                  className="w-full bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 text-slate-800 font-medium focus:outline-none focus:border-slate-900"
+                  className="w-full bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 text-slate-800 font-medium focus:outline-none focus:border-[#345D9D] focus:ring-1 focus:ring-[#345D9D]/20"
                 >
                   <option value="todos">Todos los Puestos</option>
                   <option value="Administrativo">Administrativo</option>
@@ -445,7 +445,7 @@ export default function ClimateResultsView({ rawResponses = [], loading = false,
                 <select
                   value={selectedAntiguedad}
                   onChange={(e) => setSelectedAntiguedad(e.target.value)}
-                  className="w-full bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 text-slate-800 font-medium focus:outline-none focus:border-slate-900"
+                  className="w-full bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 text-slate-800 font-medium focus:outline-none focus:border-[#345D9D] focus:ring-1 focus:ring-[#345D9D]/20"
                 >
                   <option value="todas">Todas las Antigüedades</option>
                   <option value="Menos de 1 año">Menos de 1 año</option>
@@ -542,9 +542,9 @@ export default function ClimateResultsView({ rawResponses = [], loading = false,
               <div className="flex border-b border-slate-200 gap-6 text-xs font-bold pt-2">
                 <button
                   onClick={() => setSubTab('dimensiones')}
-                  className={`pb-2 transition-colors border-b-2 flex items-center gap-1.5 ${
+                  className={`pb-2 transition-colors border-b-2 flex items-center gap-1.5 cursor-pointer ${
                     subTab === 'dimensiones'
-                      ? 'border-slate-900 text-slate-900'
+                      ? 'border-[#345D9D] text-[#345D9D]'
                       : 'border-transparent text-slate-400 hover:text-slate-600'
                   }`}
                 >
@@ -554,9 +554,9 @@ export default function ClimateResultsView({ rawResponses = [], loading = false,
 
                 <button
                   onClick={() => setSubTab('enps')}
-                  className={`pb-2 transition-colors border-b-2 flex items-center gap-1.5 ${
+                  className={`pb-2 transition-colors border-b-2 flex items-center gap-1.5 cursor-pointer ${
                     subTab === 'enps'
-                      ? 'border-slate-900 text-slate-900'
+                      ? 'border-[#345D9D] text-[#345D9D]'
                       : 'border-transparent text-slate-400 hover:text-slate-600'
                   }`}
                 >
@@ -566,9 +566,9 @@ export default function ClimateResultsView({ rawResponses = [], loading = false,
 
                 <button
                   onClick={() => setSubTab('cualitativo')}
-                  className={`pb-2 transition-colors border-b-2 flex items-center gap-1.5 ${
+                  className={`pb-2 transition-colors border-b-2 flex items-center gap-1.5 cursor-pointer ${
                     subTab === 'cualitativo'
-                      ? 'border-slate-900 text-slate-900'
+                      ? 'border-[#345D9D] text-[#345D9D]'
                       : 'border-transparent text-slate-400 hover:text-slate-600'
                   }`}
                 >
@@ -742,7 +742,7 @@ export default function ClimateResultsView({ rawResponses = [], loading = false,
                             </div>
                             <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
                               <div 
-                                className="h-full bg-slate-800 rounded-full" 
+                                className="h-full bg-[#345D9D] rounded-full transition-all duration-300" 
                                 style={{ width: `${Math.min(100, item.porcentaje)}%` }}
                               />
                             </div>
@@ -768,9 +768,9 @@ export default function ClimateResultsView({ rawResponses = [], loading = false,
                       <button
                         key={tab.id}
                         onClick={() => setCualitativaSeleccionada(tab.id)}
-                        className={`px-3 py-1.5 rounded-lg font-bold border transition-all ${
+                        className={`px-3 py-1.5 rounded-lg font-bold border transition-all cursor-pointer ${
                           cualitativaSeleccionada === tab.id
-                            ? 'bg-slate-900 text-white border-slate-900 shadow-sm'
+                            ? 'bg-[#345D9D] text-white border-[#345D9D] shadow-md shadow-[#345D9D]/20'
                             : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'
                         }`}
                       >

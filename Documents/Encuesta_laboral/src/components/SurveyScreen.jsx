@@ -159,15 +159,15 @@ export default function SurveyScreen({ anonymousId, demographicMetadata, onSubmi
         </div>
       </div>
 
-      {/* 2. BANNER DE SESIÓN SEGURA CON ÍCONO INCÓGNITO DE GOOGLE (Matching Image 1) */}
-      <div className="rounded-2xl bg-slate-950 text-white p-4 sm:p-5 text-left flex items-center gap-4 shadow-sm border border-slate-800">
+      {/* 2. BANNER DE SESIÓN SEGURA CON ÍCONO INCÓGNITO DE GOOGLE */}
+      <div className="rounded-2xl bg-[#244372] text-white p-4 sm:p-5 text-left flex items-center gap-4 shadow-md border border-[#345D9D]/50">
         <div className="w-12 h-12 rounded-full bg-[#e8eaed] flex items-center justify-center shrink-0 shadow-md">
           <IncognitoIcon className="w-8 h-8 text-[#202124]" strokeWidth={5} />
         </div>
         <div className="space-y-0.5">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-300">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-blue-200">
               MODO INCÓGNITO ACTIVADO &bull; CANAL DESVINCULADO
             </span>
           </div>
@@ -177,7 +177,7 @@ export default function SurveyScreen({ anonymousId, demographicMetadata, onSubmi
         </div>
       </div>
 
-      {/* 3. BARRA DE PROGRESO SEGMENTADA EN 5 PASOS (Matching Image 3) */}
+      {/* 3. BARRA DE PROGRESO SEGMENTADA EN 5 PASOS */}
       <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs">
           <div className="font-bold text-slate-900 text-xs sm:text-sm">
@@ -199,10 +199,10 @@ export default function SurveyScreen({ anonymousId, demographicMetadata, onSubmi
                 key={idx}
                 className="h-2 rounded-full bg-slate-100 overflow-hidden border border-slate-200"
               >
-                {isCompleted && <div className="h-full w-full bg-slate-950" />}
+                {isCompleted && <div className="h-full w-full bg-[#345D9D]" />}
                 {isCurrent && (
                   <div 
-                    className="h-full bg-slate-950 transition-all duration-300"
+                    className="h-full bg-[#345D9D] transition-all duration-300"
                     style={{ 
                       width: `${Math.max(15, Math.min(100, (stepQuestions.filter(q => answers[q.id || q.orden] !== undefined).length / Math.max(1, stepQuestions.length)) * 100))}%` 
                     }}
@@ -270,17 +270,17 @@ export default function SurveyScreen({ anonymousId, demographicMetadata, onSubmi
                             onClick={() => handleSingleSelect(qKey, opt.value)}
                             className={`p-3 sm:p-3.5 rounded-xl border text-center flex flex-col items-center justify-center transition-all duration-150 cursor-pointer select-none ${
                               isSelected
-                                ? 'border-2 border-slate-950 bg-slate-50 text-slate-950 shadow-sm'
+                                ? 'border-2 border-[#345D9D] bg-blue-50/50 text-[#345D9D] shadow-sm ring-1 ring-[#345D9D]/20'
                                 : 'border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50/60 text-slate-700'
                             }`}
                           >
                             {/* Radio circle + número */}
                             <div className="flex items-center justify-center gap-1.5 mb-1.5">
                               <span className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-all ${
-                                isSelected ? 'border-slate-950 bg-white' : 'border-slate-300'
+                                isSelected ? 'border-[#345D9D] bg-white' : 'border-slate-300'
                               }`}>
                                 {isSelected && (
-                                  <span className="w-2 h-2 rounded-full bg-slate-950" />
+                                  <span className="w-2 h-2 rounded-full bg-[#345D9D]" />
                                 )}
                               </span>
                               <span className="text-sm sm:text-base font-extrabold font-mono">
@@ -311,7 +311,7 @@ export default function SurveyScreen({ anonymousId, demographicMetadata, onSubmi
                               onClick={() => handleSingleSelect(qKey, num)}
                               className={`py-3 px-1 rounded-xl border font-mono font-bold text-sm sm:text-base flex items-center justify-center transition-all cursor-pointer ${
                                 isSelected
-                                  ? 'border-2 border-slate-950 bg-slate-950 text-white shadow-sm'
+                                  ? 'border-2 border-[#345D9D] bg-[#345D9D] text-white shadow-sm ring-2 ring-[#345D9D]/20'
                                   : 'border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50 text-slate-700'
                               }`}
                             >
@@ -339,15 +339,15 @@ export default function SurveyScreen({ anonymousId, demographicMetadata, onSubmi
                             onClick={() => handleSingleSelect(qKey, opt)}
                             className={`p-3.5 rounded-xl border text-left font-medium text-xs sm:text-sm transition-all flex items-center justify-between cursor-pointer ${
                               isSelected
-                                ? 'border-2 border-slate-950 bg-slate-50 text-slate-950 font-bold shadow-sm'
+                                ? 'border-2 border-[#345D9D] bg-blue-50/50 text-[#345D9D] font-bold shadow-sm'
                                 : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50'
                             }`}
                           >
                             <span>{opt}</span>
                             <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${
-                              isSelected ? 'border-slate-950' : 'border-slate-300'
+                              isSelected ? 'border-[#345D9D]' : 'border-slate-300'
                             }`}>
-                              {isSelected && <div className="w-2 h-2 rounded-full bg-slate-950" />}
+                              {isSelected && <div className="w-2 h-2 rounded-full bg-[#345D9D]" />}
                             </div>
                           </button>
                         );
@@ -360,7 +360,7 @@ export default function SurveyScreen({ anonymousId, demographicMetadata, onSubmi
                     <div className="space-y-2.5 pt-1">
                       <div className="flex justify-between items-center text-xs text-slate-500">
                         <span>Selecciona hasta 2 opciones prioritarias:</span>
-                        <span className="font-mono font-bold text-slate-900">
+                        <span className="font-mono font-bold text-[#345D9D]">
                           {(val || []).length} / 2 seleccionadas
                         </span>
                       </div>
@@ -374,13 +374,13 @@ export default function SurveyScreen({ anonymousId, demographicMetadata, onSubmi
                               onClick={() => handleMultipleSelect(qKey, opt, q.max_opciones || 2)}
                               className={`p-3.5 rounded-xl border text-left font-medium text-xs sm:text-sm transition-all flex items-center justify-between cursor-pointer ${
                                 isSelected
-                                  ? 'border-2 border-slate-950 bg-slate-50 text-slate-950 font-bold shadow-sm'
+                                  ? 'border-2 border-[#345D9D] bg-blue-50/50 text-[#345D9D] font-bold shadow-sm'
                                   : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50'
                               }`}
                             >
                               <span>{opt}</span>
                               <div className={`w-4 h-4 rounded border-2 flex items-center justify-center shrink-0 ${
-                                isSelected ? 'border-slate-950 bg-slate-950 text-white' : 'border-slate-300'
+                                isSelected ? 'border-[#345D9D] bg-[#345D9D] text-white' : 'border-slate-300'
                               }`}>
                                 {isSelected && <Check className="w-3 h-3 stroke-[3]" />}
                               </div>
@@ -441,7 +441,7 @@ export default function SurveyScreen({ anonymousId, demographicMetadata, onSubmi
             <button
               type="button"
               onClick={handleNextStep}
-              className="py-3 px-6 rounded-xl font-bold text-xs sm:text-sm bg-slate-950 hover:bg-black text-white flex items-center gap-2 transition-all cursor-pointer shadow-sm active:scale-[0.99]"
+              className="py-3 px-6 rounded-xl font-bold text-xs sm:text-sm bg-[#345D9D] hover:bg-[#284a7e] text-white flex items-center gap-2 transition-all cursor-pointer shadow-md shadow-[#345D9D]/20 active:scale-[0.99]"
             >
               <span>Continuar a sección {currentStep + 2}</span>
               <ArrowRight className="w-4 h-4" />
@@ -450,7 +450,7 @@ export default function SurveyScreen({ anonymousId, demographicMetadata, onSubmi
             <button
               type="submit"
               disabled={isSubmitting}
-              className="py-3.5 px-7 rounded-xl font-bold text-xs sm:text-sm bg-slate-950 hover:bg-black text-white flex items-center gap-2 transition-all cursor-pointer shadow-sm disabled:bg-slate-300 disabled:cursor-not-allowed"
+              className="py-3.5 px-7 rounded-xl font-bold text-xs sm:text-sm bg-[#345D9D] hover:bg-[#284a7e] text-white flex items-center gap-2 transition-all cursor-pointer shadow-md shadow-[#345D9D]/20 disabled:bg-slate-300 disabled:cursor-not-allowed"
             >
               {isSubmitting ? (
                 <>

@@ -267,7 +267,7 @@ export default function AdminModal({ isOpen, onClose, onQuestionsUpdated }) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/60 backdrop-blur-sm">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-[#0f1d33]/70 backdrop-blur-sm">
       <motion.div
         initial={{ opacity: 0, scale: 0.96 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -277,7 +277,7 @@ export default function AdminModal({ isOpen, onClose, onQuestionsUpdated }) {
         {/* Cabecera del Modal */}
         <div className="px-6 py-5 border-b border-slate-100 flex items-center justify-between bg-slate-50">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center shadow-sm">
+            <div className="w-10 h-10 rounded-xl bg-[#345D9D] text-white flex items-center justify-center shadow-md shadow-[#345D9D]/20">
               <Shield className="w-5 h-5 text-emerald-400 stroke-[2.2]" />
             </div>
             <div>
@@ -300,7 +300,7 @@ export default function AdminModal({ isOpen, onClose, onQuestionsUpdated }) {
         {/* Pantalla de Autenticación con PIN */}
         {!isAuthenticated ? (
           <form onSubmit={handleLogin} className="p-8 sm:p-12 space-y-5 text-center max-w-sm mx-auto my-auto">
-            <div className="w-12 h-12 rounded-2xl bg-slate-100 border border-slate-200 text-slate-900 mx-auto flex items-center justify-center">
+            <div className="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-100 text-[#345D9D] mx-auto flex items-center justify-center">
               <Lock className="w-6 h-6" />
             </div>
             <div>
@@ -316,7 +316,7 @@ export default function AdminModal({ isOpen, onClose, onQuestionsUpdated }) {
               value={pin}
               onChange={(e) => setPin(e.target.value)}
               placeholder="PIN (por defecto: 2026)"
-              className="w-full text-center tracking-widest font-mono text-xl py-3 px-4 rounded-xl border border-slate-200 focus:border-slate-950 focus:ring-4 focus:ring-slate-950/10 outline-none"
+              className="w-full text-center tracking-widest font-mono text-xl py-3 px-4 rounded-xl border border-slate-200 focus:border-[#345D9D] focus:ring-4 focus:ring-[#345D9D]/15 outline-none"
               autoFocus
             />
 
@@ -326,7 +326,7 @@ export default function AdminModal({ isOpen, onClose, onQuestionsUpdated }) {
 
             <button
               type="submit"
-              className="w-full py-3.5 rounded-xl bg-slate-950 hover:bg-black text-white font-bold text-sm transition-colors cursor-pointer shadow-sm"
+              className="w-full py-3.5 rounded-xl bg-[#345D9D] hover:bg-[#284a7e] text-white font-bold text-sm transition-colors cursor-pointer shadow-md shadow-[#345D9D]/20 active:scale-[0.99]"
             >
               Ingresar al Dashboard
             </button>
@@ -341,7 +341,7 @@ export default function AdminModal({ isOpen, onClose, onQuestionsUpdated }) {
                 onClick={() => setActiveTab('dashboard')}
                 className={`pb-3 flex items-center gap-2 transition-all cursor-pointer whitespace-nowrap ${
                   activeTab === 'dashboard'
-                    ? 'border-b-2 border-slate-950 text-slate-950'
+                    ? 'border-b-2 border-[#345D9D] text-[#345D9D]'
                     : 'text-slate-500 hover:text-slate-800'
                 }`}
               >
@@ -354,7 +354,7 @@ export default function AdminModal({ isOpen, onClose, onQuestionsUpdated }) {
                 onClick={() => setActiveTab('analytics')}
                 className={`pb-3 flex items-center gap-2 transition-all cursor-pointer whitespace-nowrap ${
                   activeTab === 'analytics'
-                    ? 'border-b-2 border-slate-950 text-slate-950'
+                    ? 'border-b-2 border-[#345D9D] text-[#345D9D]'
                     : 'text-slate-500 hover:text-slate-800'
                 }`}
               >
@@ -367,7 +367,7 @@ export default function AdminModal({ isOpen, onClose, onQuestionsUpdated }) {
                 onClick={() => setActiveTab('padron')}
                 className={`pb-3 flex items-center gap-2 transition-all cursor-pointer whitespace-nowrap ${
                   activeTab === 'padron'
-                    ? 'border-b-2 border-slate-950 text-slate-950'
+                    ? 'border-b-2 border-[#345D9D] text-[#345D9D]'
                     : 'text-slate-500 hover:text-slate-800'
                 }`}
               >
@@ -380,7 +380,7 @@ export default function AdminModal({ isOpen, onClose, onQuestionsUpdated }) {
                 onClick={() => setActiveTab('preguntas')}
                 className={`pb-3 flex items-center gap-2 transition-all cursor-pointer whitespace-nowrap ${
                   activeTab === 'preguntas'
-                    ? 'border-b-2 border-slate-950 text-slate-950'
+                    ? 'border-b-2 border-[#345D9D] text-[#345D9D]'
                     : 'text-slate-500 hover:text-slate-800'
                 }`}
               >
@@ -456,12 +456,12 @@ export default function AdminModal({ isOpen, onClose, onQuestionsUpdated }) {
                     <span className="text-xs font-bold text-slate-700 uppercase tracking-wider">
                       Meta de Cobertura
                     </span>
-                    <div className="text-2xl sm:text-3xl font-extrabold text-slate-950 font-mono">
+                    <div className="text-2xl sm:text-3xl font-extrabold text-[#345D9D] font-mono">
                       {metrics?.porcentaje ?? 0}%
                     </div>
                     <div className="w-full bg-slate-200 rounded-full h-1.5 mt-2 overflow-hidden">
                       <div
-                        className="h-full bg-slate-950 transition-all duration-300"
+                        className="h-full bg-[#345D9D] transition-all duration-300"
                         style={{ width: `${metrics?.porcentaje ?? 0}%` }}
                       />
                     </div>
@@ -474,7 +474,7 @@ export default function AdminModal({ isOpen, onClose, onQuestionsUpdated }) {
                   <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-3">
                     <div className="flex items-center justify-between border-b border-slate-100 pb-2">
                       <div className="flex items-center gap-2 text-sm font-bold text-slate-900">
-                        <MapPin className="w-4 h-4 text-slate-900" />
+                        <MapPin className="w-4 h-4 text-[#345D9D]" />
                         Participación por Sede
                       </div>
                       <span className="text-xs text-slate-400 font-mono">Completados / Total</span>
@@ -493,7 +493,7 @@ export default function AdminModal({ isOpen, onClose, onQuestionsUpdated }) {
                             </div>
                             <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden border border-slate-200">
                               <div
-                                className="h-full bg-slate-950 transition-all duration-200"
+                                className="h-full bg-[#345D9D] transition-all duration-200"
                                 style={{ width: `${pct}%` }}
                               />
                             </div>
@@ -507,7 +507,7 @@ export default function AdminModal({ isOpen, onClose, onQuestionsUpdated }) {
                   <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-3">
                     <div className="flex items-center justify-between border-b border-slate-100 pb-2">
                       <div className="flex items-center gap-2 text-sm font-bold text-slate-900">
-                        <Briefcase className="w-4 h-4 text-slate-900" />
+                        <Briefcase className="w-4 h-4 text-[#345D9D]" />
                         Participación por Tipo de Puesto
                       </div>
                       <span className="text-xs text-slate-400 font-mono">Completados / Total</span>
@@ -526,7 +526,7 @@ export default function AdminModal({ isOpen, onClose, onQuestionsUpdated }) {
                             </div>
                             <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden border border-slate-200">
                               <div
-                                className="h-full bg-slate-950 transition-all duration-200"
+                                className="h-full bg-[#345D9D] transition-all duration-200"
                                 style={{ width: `${pct}%` }}
                               />
                             </div>
@@ -541,12 +541,12 @@ export default function AdminModal({ isOpen, onClose, onQuestionsUpdated }) {
                 <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-3">
                   <div className="flex items-center justify-between border-b border-slate-100 pb-2">
                     <div className="flex items-center gap-2 text-sm font-bold text-slate-900">
-                      <Building2 className="w-4 h-4 text-slate-900" />
+                      <Building2 className="w-4 h-4 text-[#345D9D]" />
                       Avance por Área de Trabajo ({Object.keys(metrics?.porArea || {}).length} áreas)
                     </div>
                     <button
                       onClick={cargarDatos}
-                      className="text-xs text-slate-700 hover:text-black hover:underline flex items-center gap-1 cursor-pointer font-medium"
+                      className="text-xs text-slate-700 hover:text-[#345D9D] hover:underline flex items-center gap-1 cursor-pointer font-medium"
                     >
                       <RefreshCw className="w-3 h-3" /> Actualizar datos
                     </button>
@@ -559,13 +559,13 @@ export default function AdminModal({ isOpen, onClose, onQuestionsUpdated }) {
                         <div key={area} className="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5">
                           <div className="flex justify-between items-start gap-2">
                             <span className="text-xs font-bold text-slate-800 line-clamp-1">{area}</span>
-                            <span className={`text-[11px] font-mono font-bold shrink-0 ${pct === 100 ? 'text-emerald-700' : pct > 50 ? 'text-slate-950' : 'text-amber-700'}`}>
+                            <span className={`text-[11px] font-mono font-bold shrink-0 ${pct === 100 ? 'text-emerald-700' : pct > 50 ? 'text-[#345D9D]' : 'text-amber-700'}`}>
                               {data.votaron}/{data.total} ({pct}%)
                             </span>
                           </div>
                           <div className="w-full bg-slate-200 rounded-full h-1.5 overflow-hidden">
                             <div
-                              className={`h-full transition-all duration-200 ${pct === 100 ? 'bg-emerald-600' : 'bg-slate-950'}`}
+                              className={`h-full transition-all duration-200 ${pct === 100 ? 'bg-emerald-600' : 'bg-[#345D9D]'}`}
                               style={{ width: `${pct}%` }}
                             />
                           </div>
@@ -590,7 +590,7 @@ export default function AdminModal({ isOpen, onClose, onQuestionsUpdated }) {
                     <button
                       type="button"
                       onClick={handleExportTrackingReport}
-                      className="py-2 px-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs flex items-center gap-1.5 transition-colors cursor-pointer shrink-0"
+                      className="py-2 px-3.5 rounded-xl bg-[#345D9D] hover:bg-[#284a7e] text-white font-semibold text-xs flex items-center gap-1.5 transition-colors cursor-pointer shrink-0 shadow-sm shadow-[#345D9D]/20"
                     >
                       <Download className="w-3.5 h-3.5" />
                       Exportar Lista CSV
@@ -606,14 +606,14 @@ export default function AdminModal({ isOpen, onClose, onQuestionsUpdated }) {
                         placeholder="Buscar por DNI o Nombre..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="w-full pl-8 pr-3 py-2 rounded-xl border border-slate-200 focus:border-blue-700 outline-none"
+                        className="w-full pl-8 pr-3 py-2 rounded-xl border border-slate-200 focus:border-[#345D9D] focus:ring-1 focus:ring-[#345D9D]/20 outline-none"
                       />
                     </div>
 
                     <select
                       value={filterStatus}
                       onChange={(e) => setFilterStatus(e.target.value)}
-                      className="py-2 px-3 rounded-xl border border-slate-200 focus:border-blue-700 outline-none bg-white font-medium"
+                      className="py-2 px-3 rounded-xl border border-slate-200 focus:border-[#345D9D] focus:ring-1 focus:ring-[#345D9D]/20 outline-none bg-white font-medium"
                     >
                       <option value="todos">Todos los Estados</option>
                       <option value="pendientes">Solo Pendientes (Faltan)</option>
@@ -623,7 +623,7 @@ export default function AdminModal({ isOpen, onClose, onQuestionsUpdated }) {
                     <select
                       value={filterArea}
                       onChange={(e) => setFilterArea(e.target.value)}
-                      className="py-2 px-3 rounded-xl border border-slate-200 focus:border-blue-700 outline-none bg-white font-medium truncate"
+                      className="py-2 px-3 rounded-xl border border-slate-200 focus:border-[#345D9D] focus:ring-1 focus:ring-[#345D9D]/20 outline-none bg-white font-medium truncate"
                     >
                       <option value="todas">Todas las Áreas</option>
                       {AREAS_DISPONIBLES.map((a, idx) => (
@@ -762,7 +762,7 @@ export default function AdminModal({ isOpen, onClose, onQuestionsUpdated }) {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-xs text-slate-700">
                     {AREAS_DISPONIBLES.map((area, idx) => (
                       <div key={idx} className="flex items-center gap-1.5 truncate">
-                        <span className="w-1.5 h-1.5 rounded-full bg-slate-900 shrink-0"></span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#345D9D] shrink-0"></span>
                         <span className="truncate">{area}</span>
                       </div>
                     ))}
@@ -780,7 +780,7 @@ export default function AdminModal({ isOpen, onClose, onQuestionsUpdated }) {
                   {/* Descargar Plantilla */}
                   <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
                     <div className="flex items-center gap-2 text-slate-800 font-bold text-sm">
-                      <Download className="w-4 h-4 text-slate-900" />
+                      <Download className="w-4 h-4 text-[#345D9D]" />
                       1. Descargar Formato de Preguntas
                     </div>
                     <p className="text-xs text-slate-500 leading-relaxed">
@@ -799,13 +799,13 @@ export default function AdminModal({ isOpen, onClose, onQuestionsUpdated }) {
                   {/* Subir Preguntas */}
                   <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
                     <div className="flex items-center gap-2 text-slate-900 font-bold text-sm">
-                      <Upload className="w-4 h-4 text-slate-900" />
+                      <Upload className="w-4 h-4 text-[#345D9D]" />
                       2. Subir Preguntas
                     </div>
                     <p className="text-xs text-slate-600 leading-relaxed">
                       Sube tu archivo CSV completado para actualizar las preguntas en Supabase en tiempo real.
                     </p>
-                    <label className="w-full py-2.5 px-4 rounded-xl bg-slate-950 hover:bg-black text-white font-semibold text-xs flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-sm">
+                    <label className="w-full py-2.5 px-4 rounded-xl bg-[#345D9D] hover:bg-[#284a7e] text-white font-semibold text-xs flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-md shadow-[#345D9D]/20">
                       <Upload className="w-4 h-4" />
                       <span>{loading ? 'Subiendo...' : 'Seleccionar archivo CSV'}</span>
                       <input
@@ -827,7 +827,7 @@ export default function AdminModal({ isOpen, onClose, onQuestionsUpdated }) {
                     </h5>
                     <button
                       onClick={cargarDatos}
-                      className="text-xs text-blue-700 hover:underline flex items-center gap-1 cursor-pointer"
+                      className="text-xs text-[#345D9D] hover:underline flex items-center gap-1 cursor-pointer font-semibold"
                     >
                       <RefreshCw className="w-3 h-3" /> Actualizar
                     </button>
