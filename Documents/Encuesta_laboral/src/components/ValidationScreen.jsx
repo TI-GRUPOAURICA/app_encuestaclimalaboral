@@ -49,7 +49,7 @@ export default function ValidationScreen({ onValidate }) {
 
       const res = await verificarDNIEnPadron(dni);
 
-      if (!res.exists || !res.metadata) {
+      if (!res.exists) {
         setErrorMsg('El DNI ingresado no figura en el padrón de colaboradores autorizados para la encuesta.');
         setIsValidating(false);
         return;
@@ -57,6 +57,12 @@ export default function ValidationScreen({ onValidate }) {
 
       if (res.alreadyVoted) {
         setWarningMsg('Este DNI ya completó la encuesta previamente. ¡Muchas gracias por tu participación!');
+        setIsValidating(false);
+        return;
+      }
+
+      if (!res.metadata) {
+        setErrorMsg('No se encontraron los datos sociolaborales del colaborador en el padrón.');
         setIsValidating(false);
         return;
       }
