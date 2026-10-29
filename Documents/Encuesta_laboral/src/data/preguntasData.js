@@ -343,7 +343,7 @@ export const PREGUNTAS_OFICIALES = [
     orden: 25,
     bloque_n: 6,
     seccion: 'Trato en el trabajo',
-    titulo: 'La situación ocurrió principalmente por parte de: (Responde solo si marcaste «Sí» en la pregunta 27 o 28.)',
+    titulo: 'La situación ocurrió principalmente por parte de: (Responde solo si marcaste «Sí» en la pregunta 23 o 24.)',
     descripcion: 'Responde solo si marcaste «Sí» en alguna de las preguntas anteriores.',
     tipo: 'opcion_simple',
     opciones: ['Jefe/supervisor', 'Compañero/a', 'Persona a cargo', 'Tercero', 'Ninguno'],
