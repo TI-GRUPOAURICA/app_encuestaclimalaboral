@@ -42,11 +42,11 @@ export async function generateAcuerdoPDF(visitanteInfo, signatureDataUrl) {
   try {
     let logosEmpresasBytes;
     try {
-      const res1 = await fetch('/logos-empresa.png?v=' + Date.now());
+      const res1 = await fetch('/logos-empresa.png');
       if (!res1.ok) throw new Error();
       logosEmpresasBytes = await res1.arrayBuffer();
     } catch (e1) {
-      const res2 = await fetch('/logo-empresa.png?v=' + Date.now());
+      const res2 = await fetch('/logo-empresa.png');
       if (!res2.ok) throw new Error();
       logosEmpresasBytes = await res2.arrayBuffer();
     }

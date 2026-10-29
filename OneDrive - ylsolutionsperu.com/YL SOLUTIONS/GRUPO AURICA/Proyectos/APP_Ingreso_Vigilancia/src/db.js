@@ -129,29 +129,73 @@ export async function registrarSalida(registroId) {
   return data;
 }
 
-export async function getHistorial(dateString = null, sedeFiltro = null) {
-  let query = supabase
-    .from('registros')
-    .select(`
-      id, fecha_ingreso, fecha_salida, autoriza, procedencia, comentario, resguardo_responsable, sede,
-      personas (nombres, apellido_paterno, apellido_materno, dni)
-    `);
-    
-  if (dateString) {
-    const start = new Date(dateString + 'T00:00:00');
-    const end = new Date(dateString + 'T23:59:59');
-    query = query
-      .gte('fecha_ingreso', start.toISOString())
-      .lte('fecha_ingreso', end.toISOString());
+export async function getHistorial(dateFilter = null, sedeFiltro = null) {
+  let startISO = null;
+  let endISO = null;
+
+  if (typeof dateFilter === 'string' && dateFilter.trim() !== '') {
+    startISO = new Date(dateFilter + 'T00:00:00').toISOString();
+    endISO = new Date(dateFilter + 'T23:59:59.999').toISOString();
+  } else if (dateFilter && typeof dateFilter === 'object') {
+    if (dateFilter.startDate) {
+      startISO = (dateFilter.startDate instanceof Date)
+        ? dateFilter.startDate.toISOString()
+        : new Date(dateFilter.startDate).toISOString();
+    }
+    if (dateFilter.endDate) {
+      endISO = (dateFilter.endDate instanceof Date)
+        ? dateFilter.endDate.toISOString()
+        : new Date(dateFilter.endDate).toISOString();
+    }
   }
-  
-  if (sedeFiltro) {
-    query = query.eq('sede', sedeFiltro);
+
+  // Supabase limita por defecto a 1000 registros por consulta.
+  // Paginamos para garantizar que consultas mensuales o por rango
+  // descarguen la totalidad de registros sin truncarse.
+  const PAGE_SIZE = 1000;
+  let allRecords = [];
+  let from = 0;
+  let hasMore = true;
+
+  while (hasMore) {
+    let query = supabase
+      .from('registros')
+      .select(`
+        id, fecha_ingreso, fecha_salida, autoriza, procedencia, comentario, resguardo_responsable, sede,
+        personas (nombres, apellido_paterno, apellido_materno, dni, empresa)
+      `)
+      .order('fecha_ingreso', { ascending: false })
+      .range(from, from + PAGE_SIZE - 1);
+
+    if (startISO) {
+      query = query.gte('fecha_ingreso', startISO);
+    }
+    if (endISO) {
+      query = query.lte('fecha_ingreso', endISO);
+    }
+    if (sedeFiltro) {
+      query = query.eq('sede', sedeFiltro);
+    }
+
+    const { data, error } = await query;
+    if (error) {
+      console.error("Error al consultar historial en BD:", error);
+      throw error;
+    }
+
+    if (data && data.length > 0) {
+      allRecords = allRecords.concat(data);
+      if (data.length < PAGE_SIZE) {
+        hasMore = false;
+      } else {
+        from += PAGE_SIZE;
+      }
+    } else {
+      hasMore = false;
+    }
   }
-  
-  const { data, error } = await query.order('fecha_ingreso', { ascending: false });
-  if (error) throw error;
-  return data;
+
+  return allRecords;
 }
 
 // === AUTHENTICATION & PROFILES ===

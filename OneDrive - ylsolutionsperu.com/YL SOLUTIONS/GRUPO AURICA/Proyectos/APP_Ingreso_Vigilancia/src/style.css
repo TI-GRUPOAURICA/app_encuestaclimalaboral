@@ -493,3 +493,206 @@ div:where(.swal2-container) input:where(.swal2-input):focus {
   background: none; border: none; font-size: 1.5rem; color: var(--text-dark); cursor: pointer;
 }
 .modal-body { padding: 24px; }
+
+/* PDF Modal animations */
+@keyframes modalSlideIn {
+  from { opacity: 0; transform: scale(0.95) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ════════════════════════════════════════════════════════════════════════ */
+/* PANELES COLAPSABLES — aprovechar el ancho de pantalla (tablets)          */
+/* ════════════════════════════════════════════════════════════════════════ */
+
+/* Flechita sutil reutilizable */
+.panel-toggle {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  flex-shrink: 0;
+  transition: background 0.2s ease;
+}
+.panel-toggle:hover { background: rgba(255, 255, 255, 0.32); }
+.panel-toggle i { display: block; transition: transform 0.25s ease; }
+
+/* Menú lateral colapsable */
+.sidebar {
+  transition: width 0.25s ease, padding 0.25s ease;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.app-container.sidebar-hidden .sidebar {
+  width: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+.app-container.sidebar-hidden #btn-toggle-sidebar i { transform: rotate(180deg); }
+
+/* Buscador de DNI (vista Ingreso) */
+.ingreso-search {
+  flex: 0 0 300px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: flex-basis 0.25s ease;
+}
+.ingreso-search.collapsed { flex: 0 0 56px; }
+.ingreso-search.collapsed .ingreso-search-body { display: none; }
+.ingreso-search.collapsed #btn-toggle-search i { transform: rotate(180deg); }
+#btn-toggle-search {
+  background: var(--primary-blue);
+  border-color: var(--primary-blue);
+  align-self: flex-end;
+}
+#btn-toggle-search:hover { background: var(--header-blue); border-color: var(--header-blue); }
+
+/* La lista de visitantes debe poder desplazarse: antes se recortaba */
+.ingreso-layout .ingreso-list { overflow: auto; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   CAMPOS OBLIGATORIOS (pantalla de ingreso)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.req { color: #d9534f; font-weight: 700; }
+.opt { color: #94a3b8; font-weight: 400; font-size: 0.85em; }
+
+/* Campo obligatorio pendiente: se limpia en cuanto se completa.
+   Va despues de .input-field:focus para ganarle en prioridad. */
+.input-field.input-error {
+  border-color: #d9534f;
+  box-shadow: 0 0 0 3px rgba(217, 83, 79, 0.15);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ALTURA REAL DEL VIEWPORT Y MENU LATERAL SIEMPRE COMPLETO
+
+   Sintoma: en la tablet el bloque "En linea / Salir" aparecia recortado.
+   Causas:
+     (1) 100vh NO descuenta la barra del navegador en tablets y moviles,
+         asi que el fondo del layout quedaba por debajo del area visible.
+     (2) El menu no podia desplazarse: si su contenido no cabia, se recortaba.
+   Solucion: alto dinamico real + menu desplazable con el pie siempre anclado.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* 1. Alto real del area visible. Se declara vh primero como respaldo: los
+      navegadores que no entienden dvh se quedan con vh (comportamiento actual).
+      dvh: Chrome 108+, Safari 15.4+, Firefox 101+. */
+body,
+.app-container {
+  height: 100vh;
+  height: 100dvh;
+}
+
+/* 2. El logo y el pie NUNCA se encogen; el unico que cede espacio es el menu */
+.sidebar-logo { flex-shrink: 0; }
+.sidebar > div:last-child { flex-shrink: 0; }
+
+#main-nav {
+  flex: 1 1 auto;
+  min-height: 0;      /* permite encogerse por debajo de su contenido */
+  overflow-y: auto;   /* y desplazarse si aun asi no cabe */
+}
+
+/* 3. En pantallas bajas (tablet en horizontal) se compacta todo para que
+      "En linea" y "Salir" quepan sin tener que desplazar el menu. */
+@media (max-height: 760px) {
+  .sidebar { padding: 16px; gap: 10px; }
+  .sidebar-logo { margin-bottom: 12px; }
+  .sidebar-logo img { max-width: 130px; }
+  .nav-item { padding: 10px 18px; font-size: 1rem; }
+}
+
+/* Red de seguridad para ventanas muy bajas */
+@media (max-height: 560px) {
+  .sidebar-logo { margin-bottom: 8px; }
+  .sidebar-logo img { max-width: 100px; }
+  .nav-item { padding: 8px 14px; font-size: 0.95rem; }
+}
+
+/* ── HISTORIAL: PANEL LATERAL DE FILTROS Y EXPORTACIÓN ── */
+.historial-filter-card {
+  width: 250px;
+  min-width: 250px;
+  background: #ffffff;
+  padding: 20px 16px;
+  border-radius: 12px;
+  height: fit-content;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.historial-filter-tabs {
+  display: flex;
+  width: 100%;
+  background: #eef2f7;
+  padding: 3px;
+  border-radius: 8px;
+  gap: 4px;
+}
+
+.hist-tab-btn {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--text-dark);
+  padding: 7px 0;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-family: var(--font-regular);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.hist-tab-btn:hover {
+  color: var(--primary-blue);
+}
+
+.hist-tab-btn.active {
+  background: var(--primary-blue) !important;
+  color: #ffffff !important;
+  box-shadow: 0 1px 3px rgba(36, 81, 135, 0.3);
+}
+
+.hist-filter-group label {
+  font-size: 0.75rem;
+  color: #666;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.hist-filter-group input {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  width: 100%;
+  padding: 8px 10px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 0.9rem;
+  background: #fff;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.hist-filter-group input:focus {
+  border-color: var(--primary-blue);
+  outline: none;
+}
+

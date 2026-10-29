@@ -73,7 +73,11 @@
       
       <!-- Header -->
         <header class="header" id="header">
-          <div style="display:flex; align-items:center; gap:20px;">
+          <div style="display:flex; align-items:center; gap:16px; min-width:0;">
+            <button id="btn-toggle-sidebar" class="panel-toggle" type="button"
+                    title="Ocultar / mostrar el menu lateral" aria-label="Ocultar o mostrar el menu lateral">
+              <i class="ph ph-caret-left"></i>
+            </button>
             <h1 id="header-title">REGISTRO DE INGRESO Y SALIDA</h1>
             <div style="position: relative; display: inline-block;">
               <select id="global_sede" class="input-field" style="appearance: none; -webkit-appearance: none; width:220px; background: rgba(255,255,255,0.15); color:white; border: 1px solid rgba(255,255,255,0.4); padding:8px 36px 8px 16px; font-weight:600; font-size: 0.95rem; border-radius: 20px; backdrop-filter: blur(10px); cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-shadow: 0 1px 2px rgba(0,0,0,0.2);">
@@ -202,9 +206,14 @@
                 <p style="color:var(--text-main); font-size:1rem; margin-bottom:12px; font-weight: 600;">
                   Antes de continuar, es obligatorio leer nuestro Acuerdo de Confidencialidad:
                 </p>
-                <div style="width: 100%; height: 300px; border: 1px solid #e2e8f0; border-radius: 12px; margin-bottom: 16px; overflow: hidden; background: #f8fafc; display: flex; justify-content: center; align-items: center;">
-                  <iframe id="iframe-acuerdo-preview" src="" width="100%" height="100%" style="border: none;" title="Acuerdo de Confidencialidad"></iframe>
-                </div>
+                <button type="button" id="btn-ver-acuerdo-pdf" style="width: 100%; padding: 16px 24px; border: 2px dashed var(--primary-blue); border-radius: 12px; background: linear-gradient(135deg, #f0f7ff 0%, #e8f0fe 100%); color: var(--primary-blue); font-size: 1rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 16px; transition: all 0.3s ease;">
+                  <i class="ph ph-file-pdf" style="font-size: 1.6rem; color: #d32f2f;"></i>
+                  Leer Acuerdo de Confidencialidad (PDF)
+                  <i class="ph ph-arrow-square-out" style="font-size: 1.2rem;"></i>
+                </button>
+                <p id="acuerdo-leido-msg" style="display:none; color: #2e7d32; font-size: 0.9rem; margin-bottom: 12px; font-weight: 600; display: none; align-items: center; gap: 6px;">
+                  <i class="ph-fill ph-check-circle" style="font-size: 1.1rem;"></i> Has abierto el acuerdo. Ahora puedes aceptar los términos.
+                </p>
                 <label class="switch-label" style="background: var(--bg-light); padding: 12px 16px; border-radius: 12px; display: inline-flex;">
                   <label class="switch">
                     <input type="checkbox" id="reg_acepto_acuerdo">
@@ -245,12 +254,18 @@
                 </tbody>
               </table>
             </div>
-            <div class="ingreso-search" style="min-width:300px;">
-              <div style="background:#ddd; border-radius:16px; padding:24px; position:relative; text-align:center;">
-                <label style="font-size:1.2rem; color:#333; display:block; margin-bottom:12px;">Buscar DNI</label>
-                <div style="position:relative;">
-                  <input type="text" class="input-field text-center" id="search_ingreso_dni" style="height:48px; border-radius:24px;">
-                  <i class="ph ph-magnifying-glass" style="position:absolute; right:16px; top:14px; font-size:1.25rem; color:var(--primary-blue);"></i>
+            <div class="ingreso-search" id="ingreso-search">
+              <button id="btn-toggle-search" class="panel-toggle" type="button"
+                      title="Ocultar / mostrar el buscador" aria-label="Ocultar o mostrar el buscador">
+                <i class="ph ph-caret-right"></i>
+              </button>
+              <div class="ingreso-search-body" id="ingreso-search-body">
+                <div style="background:#ddd; border-radius:16px; padding:24px; position:relative; text-align:center;">
+                  <label style="font-size:1.2rem; color:#333; display:block; margin-bottom:12px;">Buscar DNI</label>
+                  <div style="position:relative;">
+                    <input type="text" class="input-field text-center" id="search_ingreso_dni" style="height:48px; border-radius:24px;">
+                    <i class="ph ph-magnifying-glass" style="position:absolute; right:16px; top:14px; font-size:1.25rem; color:var(--primary-blue);"></i>
+                  </div>
                 </div>
               </div>
             </div>
@@ -283,17 +298,17 @@
             
             <div class="form-row triple mt-32">
               <div class="form-group">
-                <label>Motivo de Visita</label>
+                <label>Motivo de Visita <span class="req" title="Obligatorio">*</span></label>
                 <input type="text" class="input-field" id="det_motivo" style="border-radius:24px;">
               </div>
               <div class="form-group">
-                <label>Autoriza</label>
+                <label>Autoriza <span class="req" title="Obligatorio">*</span></label>
                 <select class="input-field" id="det_autoriza" style="border-radius:24px;">
                   <option value="">Cargando...</option>
                 </select>
               </div>
               <div class="form-group">
-                <label>Resguardo Responsable</label>
+                <label>Resguardo Responsable <span class="req" title="Obligatorio">*</span></label>
                 <select class="input-field" id="det_resguardo" style="border-radius:24px;">
                   <option value="">Cargando...</option>
                 </select>
@@ -302,11 +317,11 @@
 
             <div class="form-row mt-16">
               <div class="form-group" style="flex:1.5;">
-                <label>Comentario</label>
+                <label>Comentario <span class="req" title="Obligatorio">*</span></label>
                 <textarea class="input-field" id="det_comentario" rows="3" style="border-radius:16px; resize:none;"></textarea>
               </div>
               <div class="form-group" style="flex:1;">
-                <label>Procedencia</label>
+                <label>Procedencia <span class="req" title="Obligatorio">*</span></label>
                 <select class="input-field" id="det_procedencia" style="border-radius:24px;">
                   <option value="">Buscar elementos...</option>
                   <option value="Visita">Visita</option>
@@ -326,7 +341,7 @@
 
         <!-- PANTALLA 4: LISTA (Live Bitacora) -->
         <div id="view-lista" class="view">
-          <div class="table-container" style="height: calc(100vh - 150px); overflow-y:auto;">
+          <div class="table-container" style="height: calc(100vh - 150px); overflow:auto;">
              <!-- Same as current Home -->
              <table class="data-table">
               <thead>
@@ -344,19 +359,66 @@
         <!-- PANTALLA 5: HISTORIAL -->
         <div id="view-historial" class="view">
           <div style="display:flex; gap:24px; height:100%;">
-            <div style="width: 200px; background:white; padding:24px 16px; border-radius:12px; height:fit-content; box-shadow:0 2px 8px rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: center; gap: 24px;">
-              <input type="date" class="input-field" id="historial-date" style="border:none; border-bottom:2px solid var(--primary-blue); border-radius:0; width: 100%; text-align: center; font-weight: 500;">
-              
-              <button id="btn-export-historial" class="btn" style="background: transparent; color: #107c41; border: 1.5px solid #107c41; border-radius: 8px; padding: 8px 16px; font-size: 0.95rem; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.2s ease; width: 100%;" onmouseover="this.style.background='#107c41'; this.style.color='white';" onmouseout="this.style.background='transparent'; this.style.color='#107c41';">
-                <i class="ph ph-file-csv" style="font-size: 1.2rem;"></i> Exportar Excel
+            <div class="historial-filter-card">
+              <!-- Selector de Modo de Filtro -->
+              <div style="width: 100%;">
+                <label style="font-size:0.75rem; color:#575656; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; display:block; margin-bottom:8px; text-align:center;">
+                  Filtrar Historial
+                </label>
+                <div class="historial-filter-tabs">
+                  <button type="button" class="hist-tab-btn active" data-mode="dia">Día</button>
+                  <button type="button" class="hist-tab-btn" data-mode="mes">Mes</button>
+                  <button type="button" class="hist-tab-btn" data-mode="rango">Rango</button>
+                </div>
+              </div>
+
+              <!-- Input Modo: Día -->
+              <div id="hist-group-dia" class="hist-filter-group" style="width: 100%;">
+                <label>FECHA ESPECÍFICA</label>
+                <input type="date" class="input-field" id="historial-date">
+              </div>
+
+              <!-- Input Modo: Mes -->
+              <div id="hist-group-mes" class="hist-filter-group" style="width: 100%; display:none;">
+                <label>MES COMPLETO</label>
+                <input type="month" class="input-field" id="historial-month">
+              </div>
+
+              <!-- Input Modo: Rango -->
+              <div id="hist-group-rango" class="hist-filter-group" style="width: 100%; display:none; flex-direction:column; gap:10px;">
+                <div>
+                  <label>DESDE</label>
+                  <input type="date" class="input-field" id="historial-start-date">
+                </div>
+                <div>
+                  <label>HASTA</label>
+                  <input type="date" class="input-field" id="historial-end-date">
+                </div>
+              </div>
+
+              <!-- Botón Consultar -->
+              <button id="btn-buscar-historial" class="btn" style="width: 100%; padding: 9px 14px; font-size: 0.9rem; border-radius: 8px; gap: 6px;">
+                <i class="ph ph-magnifying-glass" style="font-size: 1.1rem;"></i> Consultar
               </button>
 
-              <div style="margin-top:24px; display:flex; justify-content:center;">
-                <button class="btn-icon" style="font-size:2rem; color:var(--primary-blue);"><i class="ph ph-arrow-u-up-left"></i></button>
+              <!-- Contador de Registros -->
+              <div id="historial-counter" style="font-size:0.8rem; color:#575656; text-align:center; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:6px; padding:6px 8px; width:100%;">
+                Total: <strong id="historial-total-count" style="color:var(--primary-blue);">0</strong> visitas
+              </div>
+
+              <!-- Botón Exportar Excel -->
+              <button id="btn-export-historial" class="btn" style="background: transparent; color: #107c41; border: 1.5px solid #107c41; border-radius: 8px; padding: 9px 14px; font-size: 0.95rem; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.2s ease; width: 100%;" onmouseover="this.style.background='#107c41'; this.style.color='white';" onmouseout="this.style.background='transparent'; this.style.color='#107c41';">
+                <i class="ph ph-file-xls" style="font-size: 1.25rem;"></i> Exportar Excel
+              </button>
+
+              <div style="margin-top:auto; padding-top:6px; display:flex; justify-content:center; width:100%;">
+                <button class="btn-icon" data-navigate="view-inicio" title="Volver al inicio" style="font-size:1.8rem; color:var(--primary-blue);">
+                  <i class="ph ph-arrow-u-up-left"></i>
+                </button>
               </div>
             </div>
             
-            <div class="table-container" style="flex:1; overflow-x:auto;">
+            <div class="table-container" style="flex:1; overflow:auto;">
               <table class="data-table" style="min-width: 1000px;">
                 <thead>
                   <tr>
@@ -383,7 +445,7 @@
               <i class="ph ph-file-xls text-xl"></i> Exportar a Excel
             </button>
           </div>
-          <div class="table-container" style="height: calc(100vh - 200px); overflow-y:auto;">
+          <div class="table-container" style="height: calc(100vh - 200px); overflow:auto;">
             <table class="data-table">
               <thead>
                 <tr>
@@ -426,6 +488,45 @@
     </main>
 
   </div>
+  <!-- Modal PDF Acuerdo de Confidencialidad -->
+  <div id="modal-acuerdo-pdf" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; z-index:10000; justify-content:center; align-items:center;">
+    <!-- Backdrop -->
+    <div id="modal-acuerdo-backdrop" style="position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); backdrop-filter:blur(4px);"></div>
+    <!-- Content -->
+    <div style="position:relative; width:90%; max-width:800px; height:90vh; background:white; border-radius:20px; box-shadow:0 25px 60px rgba(0,0,0,0.3); display:flex; flex-direction:column; overflow:hidden; animation: modalSlideIn 0.3s ease;">
+      <!-- Header -->
+      <div style="display:flex; align-items:center; justify-content:space-between; padding:16px 24px; background:linear-gradient(135deg, #245187 0%, #1a3a5c 100%); color:white; flex-shrink:0;">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <i class="ph ph-file-pdf" style="font-size:1.5rem;"></i>
+          <span style="font-size:1.1rem; font-weight:700;">Acuerdo de Confidencialidad para Visitantes</span>
+        </div>
+        <button id="btn-close-modal-pdf" style="background:rgba(255,255,255,0.2); border:none; color:white; width:36px; height:36px; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:1.2rem; transition:background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.35)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+      <!-- PDF Viewer -->
+      <div style="flex:1; position:relative; background:#525659;">
+        <div id="modal-pdf-loading" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); color:white; font-size:1.1rem; display:flex; align-items:center; gap:12px;">
+          <i class="ph ph-spinner" style="font-size:1.5rem; animation: spin 1s linear infinite;"></i> Cargando documento...
+        </div>
+        <!-- Visor propio (PDF.js -> canvas). Los navegadores de tablet y movil
+             (Android Chrome, iOS Safari) NO renderizan un PDF dentro de un
+             <iframe>: muestran el nombre del archivo y ofrecen abrirlo en otra
+             app. Pintando las paginas en un canvas funciona igual en todos. -->
+        <div id="modal-pdf-scroll" style="position:absolute; top:0; left:0; width:100%; height:100%; overflow:auto; display:none; -webkit-overflow-scrolling:touch; padding:12px; box-sizing:border-box;">
+          <div id="modal-pdf-pages" style="display:flex; flex-direction:column; align-items:center; gap:12px; min-height:100%;"></div>
+        </div>
+      </div>
+      <!-- Footer -->
+      <div style="display:flex; align-items:center; justify-content:space-between; padding:12px 24px; background:#f8fafc; border-top:1px solid #e2e8f0; flex-shrink:0;">
+        <span style="font-size:0.85rem; color:#64748b;"><i class="ph ph-info" style="margin-right:4px;"></i> Lea el documento completo antes de aceptar los términos</span>
+        <button id="btn-modal-entendido" class="btn" style="background:linear-gradient(135deg, #245187, #1a3a5c); color:white; border:none; border-radius:10px; padding:10px 28px; font-weight:600; cursor:pointer; display:flex; align-items:center; gap:8px; font-size:0.95rem;">
+          <i class="ph ph-check-circle" style="font-size:1.2rem;"></i> He leído el acuerdo
+        </button>
+      </div>
+    </div>
+  </div>
+
   <script type="module" src="/src/main.js"></script>
 </body>
 </html>
